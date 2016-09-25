@@ -198,12 +198,6 @@
     <AndroidResource Include="Resources\xml\bottombar_tabs_five.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BottomBar\BottomBarSharp.csproj">
-      <Project>{26e0957b-7b7a-4d2d-8498-92aac8fd4673}</Project>
-      <Name>BottomBarSharp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\Dimens.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +238,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-w820dp\dimens.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BottomBar\BottomBarSharp.csproj">
+      <Project>{26e0957b-7b7a-4d2d-8498-92aac8fd4673}</Project>
+      <Name>BottomBarSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
