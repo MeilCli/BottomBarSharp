@@ -34,14 +34,6 @@ var searchModule = function() {
 
     a({
         id:0,
-        title:"BottomBar",
-        content:"BottomBar",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:1,
         title:"Resource",
         content:"Resource",
         description:'',
@@ -49,47 +41,31 @@ var searchModule = function() {
     });
 
     a({
+        id:1,
+        title:"TabEvent",
+        content:"TabEvent",
+        description:'',
+        tags:''
+    });
+
+    a({
         id:2,
-        title:"Resource Dimension",
-        content:"Resource Dimension",
+        title:"Resource Drawable",
+        content:"Resource Drawable",
         description:'',
         tags:''
     });
 
     a({
         id:3,
-        title:"IOnTabSelectListener",
-        content:"IOnTabSelectListener",
+        title:"Resource Boolean",
+        content:"Resource Boolean",
         description:'',
         tags:''
     });
 
     a({
         id:4,
-        title:"TabParser",
-        content:"TabParser",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:5,
-        title:"BottomBarTabType",
-        content:"BottomBarTabType",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:6,
-        title:"BottomBarTab",
-        content:"BottomBarTab",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:7,
         title:"Resource Layout",
         content:"Resource Layout",
         description:'',
@@ -97,15 +73,31 @@ var searchModule = function() {
     });
 
     a({
-        id:8,
-        title:"Resource Style",
-        content:"Resource Style",
+        id:5,
+        title:"Resource Dimension",
+        content:"Resource Dimension",
         description:'',
         tags:''
     });
 
     a({
-        id:9,
+        id:6,
+        title:"BottomBarTabType",
+        content:"BottomBarTabType",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:7,
+        title:"TabParser",
+        content:"TabParser",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:8,
         title:"Resource Attribute",
         content:"Resource Attribute",
         description:'',
@@ -113,9 +105,17 @@ var searchModule = function() {
     });
 
     a({
+        id:9,
+        title:"BottomBar",
+        content:"BottomBar",
+        description:'',
+        tags:''
+    });
+
+    a({
         id:10,
-        title:"Resource Boolean",
-        content:"Resource Boolean",
+        title:"Resource Id",
+        content:"Resource Id",
         description:'',
         tags:''
     });
@@ -130,62 +130,6 @@ var searchModule = function() {
 
     a({
         id:12,
-        title:"IOnTabReselectListener",
-        content:"IOnTabReselectListener",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:13,
-        title:"Resource Animation",
-        content:"Resource Animation",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:14,
-        title:"Resource Integer",
-        content:"Resource Integer",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:15,
-        title:"BottomBarBadge",
-        content:"BottomBarBadge",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:16,
-        title:"TabEvent",
-        content:"TabEvent",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:17,
-        title:"Resource Id",
-        content:"Resource Id",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:18,
-        title:"BottomBarTabConfig",
-        content:"BottomBarTabConfig",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:19,
         title:"Resource Styleable",
         content:"Resource Styleable",
         description:'',
@@ -193,25 +137,75 @@ var searchModule = function() {
     });
 
     a({
-        id:20,
-        title:"Resource Drawable",
-        content:"Resource Drawable",
+        id:13,
+        title:"IOnTabReselectListener",
+        content:"IOnTabReselectListener",
         description:'',
         tags:''
     });
 
     a({
-        id:21,
+        id:14,
+        title:"Resource Animation",
+        content:"Resource Animation",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:15,
         title:"Resource String",
         content:"Resource String",
         description:'',
         tags:''
     });
 
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBar',
-        title:"BottomBar",
-        description:""
+    a({
+        id:16,
+        title:"BottomBarBadge",
+        content:"BottomBarBadge",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:17,
+        title:"Resource Integer",
+        content:"Resource Integer",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:18,
+        title:"IOnTabSelectListener",
+        content:"IOnTabSelectListener",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:19,
+        title:"BottomBarTab",
+        content:"BottomBarTab",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:20,
+        title:"BottomBarTabConfig",
+        content:"BottomBarTabConfig",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:21,
+        title:"Resource Style",
+        content:"Resource Style",
+        description:'',
+        tags:''
     });
 
     y({
@@ -221,50 +215,14 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Dimension',
-        title:"Resource.Dimension",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabEvent',
+        title:"TabEvent",
         description:""
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener',
-        title:"IOnTabSelectListener",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabParser',
-        title:"TabParser",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabType',
-        title:"BottomBarTabType",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTab',
-        title:"BottomBarTab",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Layout',
-        title:"Resource.Layout",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Style',
-        title:"Resource.Style",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Attribute',
-        title:"Resource.Attribute",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Drawable',
+        title:"Resource.Drawable",
         description:""
     });
 
@@ -275,8 +233,56 @@ var searchModule = function() {
     });
 
     y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Layout',
+        title:"Resource.Layout",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Dimension',
+        title:"Resource.Dimension",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabType',
+        title:"BottomBarTabType",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabParser',
+        title:"TabParser",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Attribute',
+        title:"Resource.Attribute",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBar',
+        title:"BottomBar",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Id',
+        title:"Resource.Id",
+        description:""
+    });
+
+    y({
         url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Color',
         title:"Resource.Color",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Styleable',
+        title:"Resource.Styleable",
         description:""
     });
 
@@ -293,8 +299,8 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Integer',
-        title:"Resource.Integer",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/String',
+        title:"Resource.String",
         description:""
     });
 
@@ -305,14 +311,20 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabEvent',
-        title:"TabEvent",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Integer',
+        title:"Resource.Integer",
         description:""
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Id',
-        title:"Resource.Id",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener',
+        title:"IOnTabSelectListener",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTab',
+        title:"BottomBarTab",
         description:""
     });
 
@@ -323,20 +335,8 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Styleable',
-        title:"Resource.Styleable",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Drawable',
-        title:"Resource.Drawable",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/String',
-        title:"Resource.String",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Style',
+        title:"Resource.Style",
         description:""
     });
 
