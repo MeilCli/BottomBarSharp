@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<link rel="self" href="https://meilcli.github.io/" />
+	<id>https://meilcli.github.io/</id>
+	<title>BottomBarSharp</title>
+	<rights>2017</rights>
+	<updated>2017-01-03T09:35:51Z</updated>
+	<entry>
+		<author>
+			<name>meilcli</name>
+		</author>
+		<link href="https://meilcli.github.io/blog/first-release.html" />
+		<id>https://meilcli.github.io/blog/first-release.html</id>
+		<title>First Release for NuGet</title>
+		<updated>2017-01-03T00:00:00Z</updated>
+		<summary>&lt;p&gt;This library has published on Github, today publish to &lt;a href="https://www.nuget.org/packages/BottomBarSharp/"&gt;NuGet&lt;/a&gt;&lt;br&gt;
+So you can install easily by NuGet&lt;/p&gt;</summary>
+	</entry>
+</feed>

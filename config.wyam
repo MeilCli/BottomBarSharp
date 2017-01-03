@@ -1,0 +1,12 @@
+Settings.Host = "meilcli.github.io";
+Settings.LinksUseHttps = true;
+Settings.LinkHideExtensions = false;
+
+FileSystem.InputPaths.Add("BottomBarSharp.Docs/input");
+FileSystem.OutputPath = "docs";
+
+GlobalMetadata[DocsKeys.Title] = "BottomBarSharp";
+GlobalMetadata[DocsKeys.SourceFiles] = "../../BottomBarSharp/BottomBarSharp/**/*.cs";
+GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/MeilCli/BottomBarSharp/tree/master/BottomBarSharp.Docs/input/";
+
+System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
