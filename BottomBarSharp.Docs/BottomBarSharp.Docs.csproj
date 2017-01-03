@@ -98,6 +98,7 @@
     <Content Include="input\index.cshtml" />
     <Content Include="input\docs\trouble-shooting.md" />
     <None Include="input\.nojekyll" />
+    <None Include="input\_Master.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

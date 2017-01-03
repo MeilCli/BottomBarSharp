@@ -9,5 +9,6 @@ FileSystem.OutputPath = "docs";
 GlobalMetadata[DocsKeys.Title] = "BottomBarSharp";
 GlobalMetadata[DocsKeys.SourceFiles] = "../../BottomBarSharp/BottomBarSharp/**/*.cs";
 GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/MeilCli/BottomBarSharp/tree/master/BottomBarSharp.Docs/input/";
+GlobalMetadata["Keywords"] = "Xamarin Android Material BottomBar BottomNavigationBar";
 
 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
