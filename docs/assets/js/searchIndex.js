@@ -34,38 +34,6 @@ var searchModule = function() {
 
     a({
         id:0,
-        title:"Resource Dimension",
-        content:"Resource Dimension",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:1,
-        title:"Resource Boolean",
-        content:"Resource Boolean",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:2,
-        title:"IOnTabReselectListener",
-        content:"IOnTabReselectListener",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:3,
-        title:"Resource Id",
-        content:"Resource Id",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:4,
         title:"Resource Integer",
         content:"Resource Integer",
         description:'',
@@ -73,63 +41,7 @@ var searchModule = function() {
     });
 
     a({
-        id:5,
-        title:"TabParser",
-        content:"TabParser",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:6,
-        title:"Resource String",
-        content:"Resource String",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:7,
-        title:"BottomBar",
-        content:"BottomBar",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:8,
-        title:"TabEvent",
-        content:"TabEvent",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:9,
-        title:"Resource Drawable",
-        content:"Resource Drawable",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:10,
-        title:"BottomBarTabType",
-        content:"BottomBarTabType",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:11,
-        title:"Resource Animation",
-        content:"Resource Animation",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:12,
+        id:1,
         title:"BottomBarBadge",
         content:"BottomBarBadge",
         description:'',
@@ -137,15 +49,47 @@ var searchModule = function() {
     });
 
     a({
-        id:13,
-        title:"BottomBarTab",
-        content:"BottomBarTab",
+        id:2,
+        title:"BottomBarTabType",
+        content:"BottomBarTabType",
         description:'',
         tags:''
     });
 
     a({
-        id:14,
+        id:3,
+        title:"BottomBar",
+        content:"BottomBar",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:4,
+        title:"Resource String",
+        content:"Resource String",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:5,
+        title:"Resource Id",
+        content:"Resource Id",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:6,
+        title:"Resource Attribute",
+        content:"Resource Attribute",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:7,
         title:"Resource Style",
         content:"Resource Style",
         description:'',
@@ -153,9 +97,65 @@ var searchModule = function() {
     });
 
     a({
+        id:8,
+        title:"Resource Color",
+        content:"Resource Color",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:9,
+        title:"Resource Dimension",
+        content:"Resource Dimension",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:10,
+        title:"BottomBarTabConfig",
+        content:"BottomBarTabConfig",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:11,
+        title:"TabEvent",
+        content:"TabEvent",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:12,
+        title:"TabParser",
+        content:"TabParser",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:13,
+        title:"Resource Styleable",
+        content:"Resource Styleable",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:14,
+        title:"Resource Boolean",
+        content:"Resource Boolean",
+        description:'',
+        tags:''
+    });
+
+    a({
         id:15,
-        title:"Resource Attribute",
-        content:"Resource Attribute",
+        title:"Resource",
+        content:"Resource",
         description:'',
         tags:''
     });
@@ -170,6 +170,22 @@ var searchModule = function() {
 
     a({
         id:17,
+        title:"IOnTabReselectListener",
+        content:"IOnTabReselectListener",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:18,
+        title:"BottomBarTab",
+        content:"BottomBarTab",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:19,
         title:"IOnTabSelectListener",
         content:"IOnTabSelectListener",
         description:'',
@@ -177,166 +193,150 @@ var searchModule = function() {
     });
 
     a({
-        id:18,
-        title:"BottomBarTabConfig",
-        content:"BottomBarTabConfig",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:19,
-        title:"Resource Styleable",
-        content:"Resource Styleable",
-        description:'',
-        tags:''
-    });
-
-    a({
         id:20,
-        title:"Resource",
-        content:"Resource",
+        title:"Resource Animation",
+        content:"Resource Animation",
         description:'',
         tags:''
     });
 
     a({
         id:21,
-        title:"Resource Color",
-        content:"Resource Color",
+        title:"Resource Drawable",
+        content:"Resource Drawable",
         description:'',
         tags:''
     });
 
     y({
-        url:'/api/BottomBarSharp/Dimension',
-        title:"Resource.Dimension",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/Boolean',
-        title:"Resource.Boolean",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/IOnTabReselectListener',
-        title:"IOnTabReselectListener",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/Id',
-        title:"Resource.Id",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/Integer',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Integer',
         title:"Resource.Integer",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/TabParser',
-        title:"TabParser",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/String',
-        title:"Resource.String",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/BottomBar',
-        title:"BottomBar",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/TabEvent',
-        title:"TabEvent",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/Drawable',
-        title:"Resource.Drawable",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/BottomBarTabType',
-        title:"BottomBarTabType",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/Animation',
-        title:"Resource.Animation",
-        description:""
-    });
-
-    y({
-        url:'/api/BottomBarSharp/BottomBarBadge',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarBadge',
         title:"BottomBarBadge",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/BottomBarTab',
-        title:"BottomBarTab",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabType',
+        title:"BottomBarTabType",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Style',
-        title:"Resource.Style",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBar',
+        title:"BottomBar",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Attribute',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/String',
+        title:"Resource.String",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Id',
+        title:"Resource.Id",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Attribute',
         title:"Resource.Attribute",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Layout',
-        title:"Resource.Layout",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Style',
+        title:"Resource.Style",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/IOnTabSelectListener',
-        title:"IOnTabSelectListener",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Color',
+        title:"Resource.Color",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/BottomBarTabConfig',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Dimension',
+        title:"Resource.Dimension",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabConfig',
         title:"BottomBarTabConfig",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Styleable',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabEvent',
+        title:"TabEvent",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabParser',
+        title:"TabParser",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Styleable',
         title:"Resource.Styleable",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Resource',
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Boolean',
+        title:"Resource.Boolean",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Resource',
         title:"Resource",
         description:""
     });
 
     y({
-        url:'/api/BottomBarSharp/Color',
-        title:"Resource.Color",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Layout',
+        title:"Resource.Layout",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabReselectListener',
+        title:"IOnTabReselectListener",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTab',
+        title:"BottomBarTab",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener',
+        title:"IOnTabSelectListener",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Animation',
+        title:"Resource.Animation",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Drawable',
+        title:"Resource.Drawable",
         description:""
     });
 

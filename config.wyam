@@ -1,4 +1,5 @@
 Settings.Host = "meilcli.github.io";
+Settings.LinkRoot = "BottomBarSharp";
 Settings.LinksUseHttps = true;
 Settings.LinkHideExtensions = false;
 
