@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata minClientVersion="2.8.3">
 		<id>BottomBarSharp</id>
-		<version>1.0.1</version>
+		<version>1.1.1</version>
 		<title>BottomNavigationBar for Xamarin.Android</title>
 		<authors>meilcli</authors>
 		<owners>meilcli</owners>
@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/MeilCli/BottomBarSharp</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
-			This library is translated from BottomBar(https://github.com/roughike/BottomBar) v2.0.2
+			This library is translated from BottomBar(https://github.com/roughike/BottomBar) v2.1.1
 		</description>
 		<summary>Material BottomNavigationBar Library</summary>
 		<tags>xamarin, android, material, bottombar, bottomnavigationbar</tags>
