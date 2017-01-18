@@ -92,6 +92,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BadgeCircle.cs" />
+    <Compile Include="BadgeContainer.cs" />
+    <Compile Include="BatchTabPropertyApplier.cs" />
     <Compile Include="BottomBar.cs" />
     <Compile Include="BottomBarBadge.cs" />
     <Compile Include="BottomBarTab.cs" />

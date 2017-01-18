@@ -27,6 +27,8 @@ namespace BottomBarSharp {
 
     public class BottomBarTab : LinearLayout {
 
+        private const string StateBadgeCount = "STATE_BADGE_COUNT_FOR_TAB_";
+
         private const long AnimationDuration = 150;
         private const float ActiveTitleScale = 1;
         private const float InactiveFixedTitleScale = 0.86f;
@@ -37,7 +39,17 @@ namespace BottomBarSharp {
 
         internal BottomBarTabType Type { get; set; } = BottomBarTabType.Fixed;
         public int IconResId { get; internal set; }
-        public string Title { get; internal set; }
+
+        private string _title;
+        public string Title {
+            get {
+                return _title;
+            }
+            set {
+                _title = value;
+                updateTitle();
+            }
+        }
 
         private float _inActiveAlpha;
         public float InActiveAlpha {
@@ -53,7 +65,7 @@ namespace BottomBarSharp {
         }
 
         private float _activeAlpha;
-        internal float ActiveAlpha {
+        public float ActiveAlpha {
             get {
                 return _activeAlpha;
             }
@@ -66,7 +78,7 @@ namespace BottomBarSharp {
         }
 
         private int _inActiveColor;
-        internal int InActiveColor {
+        public int InActiveColor {
             get {
                 return _inActiveColor;
             }
@@ -79,7 +91,7 @@ namespace BottomBarSharp {
         }
 
         private int _activeColor;
-        internal int ActiveColor {
+        public int ActiveColor {
             get {
                 return _activeColor;
             }
@@ -91,10 +103,10 @@ namespace BottomBarSharp {
             }
         }
 
-        internal int BarColorWhenSelected { get; set; }
+        public int BarColorWhenSelected { get; set; }
 
         private int _badgeBackgroundColor;
-        internal int BadgeBackgroundColor {
+        public int BadgeBackgroundColor {
             get {
                 return _badgeBackgroundColor;
             }
@@ -113,11 +125,11 @@ namespace BottomBarSharp {
         internal BottomBarBadge Badge;
 
         private int _titleTextAppearanceResId;
-        internal int TitleTextAppearanceResId {
+        public int TitleTextAppearanceResId {
             get {
                 return _titleTextAppearanceResId;
             }
-            set {
+            internal set {
                 _titleTextAppearanceResId = value;
                 updateCustomTextAppearance();
             }
@@ -128,7 +140,7 @@ namespace BottomBarSharp {
             get {
                 return _titleTypeFace;
             }
-            internal set {
+            set {
                 _titleTypeFace = value;
                 updateCustomTypeface();
             }
@@ -182,11 +194,7 @@ namespace BottomBarSharp {
         }
 
         internal void PrepareLayout() {
-            int layoutResource;
-
-            layoutResource = GetLayoutResource();
-
-            Inflate(Context,layoutResource,this);
+            Inflate(Context,GetLayoutResource(),this);
             Orientation = Orientation.Vertical;
             SetGravity(GravityFlags.CenterHorizontal);
             LayoutParameters = new LayoutParams(LayoutParams.WrapContent,LayoutParams.WrapContent);
@@ -196,11 +204,17 @@ namespace BottomBarSharp {
 
             if(Type != BottomBarTabType.Tablet) {
                 TitleView = FindViewById<TextView>(Resource.Id.bb_bottom_bar_title);
-                TitleView.Text = Title;
+                updateTitle();
             }
 
             updateCustomTextAppearance();
             updateCustomTypeface();
+        }
+
+        private void updateTitle() {
+            if(TitleView != null) {
+                TitleView.Text = Title;
+            }
         }
 
         internal int GetLayoutResource() {
@@ -437,7 +451,7 @@ namespace BottomBarSharp {
 
         protected override IParcelable OnSaveInstanceState() {
             if(Badge != null) {
-                Bundle bundle = Badge.SaveState(IndexInContainer);
+                Bundle bundle = saveState();
                 bundle.PutParcelable("superstate",base.OnSaveInstanceState());
                 return bundle;
             }
@@ -445,14 +459,26 @@ namespace BottomBarSharp {
             return base.OnSaveInstanceState();
         }
 
+        private Bundle saveState() {
+            Bundle outState = new Bundle();
+            outState.PutInt(StateBadgeCount + IndexInContainer,Badge.Count);
+
+            return outState;
+        }
+
         protected override void OnRestoreInstanceState(IParcelable state) {
-            if(Badge != null && state is Bundle) {
+            if(state is Bundle) {
                 var bundle = state as Bundle;
-                Badge.RestoreState(bundle,IndexInContainer);
+                restoreState(bundle);
 
                 state = bundle.GetParcelable("superstate") as IParcelable;
             }
             base.OnRestoreInstanceState(state);
+        }
+
+        private void restoreState(Bundle savedInstanceState) {
+            int previousBadgeCount = savedInstanceState.GetInt(StateBadgeCount + IndexInContainer);
+            SetBadgeCount(previousBadgeCount);
         }
     }
 }

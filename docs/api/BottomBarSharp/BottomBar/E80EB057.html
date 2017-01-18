@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/BottomBarSharp/assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/BottomBarSharp/assets/img/favicon.ico" type="image/x-icon">
-    <title>BottomBarSharp - API - BottomBar.SetTabTitleTypeface(Typeface) Method</title>
+    <title>BottomBarSharp - API - BottomBar.SetOnTabSelectListener(IOnTabSelectListener, bool) Method</title>
     <link href="/BottomBarSharp/assets/css/mermaid.css" rel="stylesheet">
     <link href="/BottomBarSharp/assets/css/highlight.css" rel="stylesheet">
     <link href="/BottomBarSharp/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -170,10 +170,10 @@
 				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/386A84AD.html">SetItems<wbr>(List<wbr>&lt;BottomBarTab&gt;<wbr>)<wbr></a></li>
 				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/53A9B10D.html">Set<wbr>On<wbr>Tab<wbr>Reselect<wbr>Listener<wbr>(<wbr>I<wbr>On<wbr>Tab<wbr>Reselect<wbr>Listener)<wbr></a></li>
 				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/67D979B1.html">Set<wbr>On<wbr>Tab<wbr>Select<wbr>Listener<wbr>(<wbr>I<wbr>On<wbr>Tab<wbr>Select<wbr>Listener)<wbr></a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/E80EB057.html">Set<wbr>On<wbr>Tab<wbr>Select<wbr>Listener<wbr>(<wbr>I<wbr>On<wbr>Tab<wbr>Select<wbr>Listener, <wbr>bool)<wbr></a></li>
+				<li class="selected"><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/E80EB057.html">Set<wbr>On<wbr>Tab<wbr>Select<wbr>Listener<wbr>(<wbr>I<wbr>On<wbr>Tab<wbr>Select<wbr>Listener, <wbr>bool)<wbr></a></li>
 				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/68D8EB1E.html">Set<wbr>Tab<wbr>Title<wbr>Text<wbr>Appearance<wbr>(int)<wbr></a></li>
 				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/CF35E192.html">SetTabTitleTypeface<wbr>(string)<wbr></a></li>
-				<li class="selected"><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/A831F87E.html">SetTabTitleTypeface<wbr>(Typeface)<wbr></a></li>
+				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar/A831F87E.html">SetTabTitleTypeface<wbr>(Typeface)<wbr></a></li>
 
 
                 </ul>
@@ -188,14 +188,17 @@
 
 <section class="content-header">
 			<h3><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar">BottomBar</a>.</h3>
-	<h1>SetTabTitleTypeface<wbr>(Typeface)<wbr> <small>Method</small></h1>
+	<h1>Set<wbr>On<wbr>Tab<wbr>Select<wbr>Listener<wbr>(<wbr>I<wbr>On<wbr>Tab<wbr>Select<wbr>Listener, <wbr>bool)<wbr> <small>Method</small></h1>
 </section>
 <section class="content">
 	
 	
 		<h1 id="Summary">Summary</h1>
 	<div class="lead">
-    Set a custom typeface for all tab's titles.
+    Set a listener that gets fired when the selected tab changes.
+    
+    If shouldFireInitially is set to false, this listener isn't fired straight away
+    it's set, but you'll get all events normally for consecutive tab selection changes.
     </div>
 
 		<div class="panel panel-default">
@@ -213,7 +216,7 @@
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>public void SetTabTitleTypeface(Typeface typeface)</code></pre>
+	<pre><code>public void SetOnTabSelectListener(IOnTabSelectListener listener, bool shouldFireInitially)</code></pre>
 
 
 
@@ -230,9 +233,14 @@
 					</tr>
 				</thead>
 					<tbody><tr>
-						<td>typeface</td>
-						<td>Typeface</td>
-						<td></td>
+						<td>listener</td>
+						<td><a href="/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener">IOnTabSelectListener</a></td>
+						<td>a listener for monitoring changes in tab selection.</td>
+					</tr>
+					<tr>
+						<td>shouldFireInitially</td>
+						<td>bool</td>
+						<td>whether the listener should be fired the first time it's set.</td>
 					</tr>
 			</tbody></table>
 		</div>

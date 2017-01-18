@@ -34,150 +34,6 @@ var searchModule = function() {
 
     a({
         id:0,
-        title:"Resource Attribute",
-        content:"Resource Attribute",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:1,
-        title:"Resource Id",
-        content:"Resource Id",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:2,
-        title:"Resource Integer",
-        content:"Resource Integer",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:3,
-        title:"Resource String",
-        content:"Resource String",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:4,
-        title:"Resource Dimension",
-        content:"Resource Dimension",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:5,
-        title:"Resource Layout",
-        content:"Resource Layout",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:6,
-        title:"IOnTabReselectListener",
-        content:"IOnTabReselectListener",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:7,
-        title:"Resource",
-        content:"Resource",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:8,
-        title:"BottomBar",
-        content:"BottomBar",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:9,
-        title:"IOnTabSelectListener",
-        content:"IOnTabSelectListener",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:10,
-        title:"Resource Boolean",
-        content:"Resource Boolean",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:11,
-        title:"Resource Drawable",
-        content:"Resource Drawable",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:12,
-        title:"Resource Styleable",
-        content:"Resource Styleable",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:13,
-        title:"TabParser",
-        content:"TabParser",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:14,
-        title:"Resource Color",
-        content:"Resource Color",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:15,
-        title:"Resource Animation",
-        content:"Resource Animation",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:16,
-        title:"BottomBarTabConfig",
-        content:"BottomBarTabConfig",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:17,
-        title:"Resource Style",
-        content:"Resource Style",
-        description:'',
-        tags:''
-    });
-
-    a({
-        id:18,
         title:"TabEvent",
         content:"TabEvent",
         description:'',
@@ -185,15 +41,95 @@ var searchModule = function() {
     });
 
     a({
-        id:19,
-        title:"BottomBarBadge",
-        content:"BottomBarBadge",
+        id:1,
+        title:"Resource",
+        content:"Resource",
         description:'',
         tags:''
     });
 
     a({
-        id:20,
+        id:2,
+        title:"Resource Attribute",
+        content:"Resource Attribute",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:3,
+        title:"Resource Color",
+        content:"Resource Color",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:4,
+        title:"Resource Animation",
+        content:"Resource Animation",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:5,
+        title:"TabParser",
+        content:"TabParser",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:6,
+        title:"Resource Layout",
+        content:"Resource Layout",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:7,
+        title:"Resource Style",
+        content:"Resource Style",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:8,
+        title:"IOnTabReselectListener",
+        content:"IOnTabReselectListener",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:9,
+        title:"Resource Integer",
+        content:"Resource Integer",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:10,
+        title:"IOnTabSelectListener",
+        content:"IOnTabSelectListener",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:11,
+        title:"BottomBarTabType",
+        content:"BottomBarTabType",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:12,
         title:"BottomBarTab",
         content:"BottomBarTab",
         description:'',
@@ -201,52 +137,88 @@ var searchModule = function() {
     });
 
     a({
+        id:13,
+        title:"Resource Id",
+        content:"Resource Id",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:14,
+        title:"BottomBarTabConfig",
+        content:"BottomBarTabConfig",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:15,
+        title:"Resource String",
+        content:"Resource String",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:16,
+        title:"BottomBar",
+        content:"BottomBar",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:17,
+        title:"Resource Dimension",
+        content:"Resource Dimension",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:18,
+        title:"BottomBarBadge",
+        content:"BottomBarBadge",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:19,
+        title:"Resource Styleable",
+        content:"Resource Styleable",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:20,
+        title:"Resource Boolean",
+        content:"Resource Boolean",
+        description:'',
+        tags:''
+    });
+
+    a({
         id:21,
-        title:"BottomBarTabType",
-        content:"BottomBarTabType",
+        title:"Resource Drawable",
+        content:"Resource Drawable",
+        description:'',
+        tags:''
+    });
+
+    a({
+        id:22,
+        title:"BadgeContainer",
+        content:"BadgeContainer",
         description:'',
         tags:''
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Attribute',
-        title:"Resource.Attribute",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Id',
-        title:"Resource.Id",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Integer',
-        title:"Resource.Integer",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/String',
-        title:"Resource.String",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Dimension',
-        title:"Resource.Dimension",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Layout',
-        title:"Resource.Layout",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabReselectListener',
-        title:"IOnTabReselectListener",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabEvent',
+        title:"TabEvent",
         description:""
     });
 
@@ -257,38 +229,8 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBar',
-        title:"BottomBar",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener',
-        title:"IOnTabSelectListener",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Boolean',
-        title:"Resource.Boolean",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Drawable',
-        title:"Resource.Drawable",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Styleable',
-        title:"Resource.Styleable",
-        description:""
-    });
-
-    y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabParser',
-        title:"TabParser",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Attribute',
+        title:"Resource.Attribute",
         description:""
     });
 
@@ -305,8 +247,14 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabConfig',
-        title:"BottomBarTabConfig",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabParser',
+        title:"TabParser",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Layout',
+        title:"Resource.Layout",
         description:""
     });
 
@@ -317,14 +265,26 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/TabEvent',
-        title:"TabEvent",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabReselectListener',
+        title:"IOnTabReselectListener",
         description:""
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarBadge',
-        title:"BottomBarBadge",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Integer',
+        title:"Resource.Integer",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener',
+        title:"IOnTabSelectListener",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabType',
+        title:"BottomBarTabType",
         description:""
     });
 
@@ -335,8 +295,62 @@ var searchModule = function() {
     });
 
     y({
-        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabType',
-        title:"BottomBarTabType",
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Id',
+        title:"Resource.Id",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarTabConfig',
+        title:"BottomBarTabConfig",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/String',
+        title:"Resource.String",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBar',
+        title:"BottomBar",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Dimension',
+        title:"Resource.Dimension",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BottomBarBadge',
+        title:"BottomBarBadge",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Styleable',
+        title:"Resource.Styleable",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Boolean',
+        title:"Resource.Boolean",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/Drawable',
+        title:"Resource.Drawable",
+        description:""
+    });
+
+    y({
+        url:'/BottomBarSharp/BottomBarSharp/api/BottomBarSharp/BadgeContainer',
+        title:"BadgeContainer",
         description:""
     });
 

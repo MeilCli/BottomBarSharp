@@ -30,6 +30,17 @@ namespace BottomBarSharp {
         }
 
         /// <summary>
+        /// Converts pixels to dps just as well.
+        /// </summary>
+        /// <param name="context">the Context for getting the resources</param>
+        /// <param name="px">dimension in pixels</param>
+        /// <returns>dimension in dps</returns>
+        internal static int PixelToDp(Context context,int px) {
+            DisplayMetrics displayMetrics = context.Resources.DisplayMetrics;
+            return Math.Round(px / (displayMetrics.Xdpi / (int)DisplayMetricsDensity.Default));
+        }
+
+        /// <summary>
         /// Returns screen width.
         /// </summary>
         /// <param name="context">Context to get resources and device specific display metrics</param>

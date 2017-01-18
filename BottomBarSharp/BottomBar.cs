@@ -26,6 +26,8 @@ namespace BottomBarSharp {
         private const string StateCurrentSelectedTab = "STATE_CURRENT_SELECTED_TAB";
         private const float DefaultInactiveShiftingTabAlpha = 0.6f;
 
+        private BatchTabPropertyApplier batchPropertyApplier;
+
         // Behaviors
         private const int BehaviorNone = 0;
         private const int BehaviorShifting = 1;
@@ -100,19 +102,26 @@ namespace BottomBarSharp {
         /// </summary>
         public int CurrentTabId => CurrentTab.Id;
 
+        private BottomBarTab[] currentTabs;
+
         public BottomBar(Context context) : base(context) {
             init(context,null);
         }
 
         public BottomBar(Context context,IAttributeSet attrs) : base(context,attrs) {
             init(context,attrs);
-            SetItems(tabXmlResource);
         }
 
         private void init(Context context,IAttributeSet attrs) {
+            batchPropertyApplier = new BatchTabPropertyApplier(this);
+
             populateAttributes(context,attrs);
             initializeViews();
             determineInitialBackgroundColor();
+
+            if(tabXmlResource != 0) {
+                SetItems(tabXmlResource);
+            }
         }
 
         private void populateAttributes(Context context,IAttributeSet attrs) {
@@ -237,13 +246,6 @@ namespace BottomBarSharp {
         }
 
         /// <summary>
-        /// To added, Clear the BottomBarTab for dynamic to set item
-        /// </summary>
-        public void ClearItems() {
-            tabContainer.RemoveAllViews();
-        }
-
-        /// <summary>
         /// To added, new BottomBarTab with this instance for dynamic to set item, this method is not adding to BottomBar
         /// </summary>
         /// <param name="id"></param>
@@ -278,6 +280,8 @@ namespace BottomBarSharp {
         }
 
         private void updateItems(List<BottomBarTab> bottomBarItems) {
+            tabContainer.RemoveAllViews();
+
             int index = 0;
             int biggestWidth = 0;
 
@@ -320,36 +324,47 @@ namespace BottomBarSharp {
                 index++;
             }
 
+            currentTabs = viewsToAdd;
+
             if(!isTabletMode) {
-                resizeTabsToCorrectSizes(bottomBarItems,viewsToAdd);
+                resizeTabsToCorrectSizes(viewsToAdd);
             }
         }
 
-        private void resizeTabsToCorrectSizes(List<BottomBarTab> bottomBarItems,BottomBarTab[] viewsToAdd) {
+        private void resizeTabsToCorrectSizes(BottomBarTab[] tabsToAdd) {
+            int viewWidth = MiscUtils.PixelToDp(Context,Width);
+            if(viewWidth <= 0 || viewWidth > screenWidth) {
+                viewWidth = screenWidth;
+            }
+
             int proposedItemWidth = Java.Lang.Math.Min(
-                    MiscUtils.DpToPixel(Context,screenWidth / bottomBarItems.Count),
+                    MiscUtils.DpToPixel(Context,viewWidth / tabsToAdd.Length),
                     maxFixedItemWidth
             );
 
             inActiveShiftingItemWidth = (int)(proposedItemWidth * 0.9);
-            activeShiftingItemWidth = (int)(proposedItemWidth + (proposedItemWidth * (bottomBarItems.Count * 0.1)));
+            activeShiftingItemWidth = (int)(proposedItemWidth + (proposedItemWidth * (tabsToAdd.Length * 0.1)));
             int height = Java.Lang.Math.Round(Context.Resources.GetDimension(Resource.Dimension.bb_height));
 
-            foreach(BottomBarTab bottomBarView in viewsToAdd) {
-                LayoutParams parameters;
+            foreach(BottomBarTab tabView in tabsToAdd) {
+                ViewGroup.LayoutParams parameters = tabView.LayoutParameters;
+                parameters.Height = height;
 
                 if(isShiftingMode()) {
-                    if(bottomBarView.IsActive) {
-                        parameters = new LayoutParams(activeShiftingItemWidth,height);
+                    if(tabView.IsActive) {
+                        parameters.Width = activeShiftingItemWidth;
                     } else {
-                        parameters = new LayoutParams(inActiveShiftingItemWidth,height);
+                        parameters.Width = inActiveShiftingItemWidth;
                     }
                 } else {
-                    parameters = new LayoutParams(proposedItemWidth,height);
+                    parameters.Width = proposedItemWidth;
                 }
 
-                bottomBarView.LayoutParameters = parameters;
-                tabContainer.AddView(bottomBarView);
+                if(tabView.Parent == null) {
+                    tabContainer.AddView(tabView);
+                }
+
+                tabView.RequestLayout();
             }
         }
 
@@ -361,9 +376,21 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="listener">a listener for monitoring changes in tab selection.</param>
         public void SetOnTabSelectListener(IOnTabSelectListener listener) {
+            SetOnTabSelectListener(listener,true);
+        }
+
+        /// <summary>
+        /// Set a listener that gets fired when the selected tab changes.
+        /// 
+        /// If shouldFireInitially is set to false, this listener isn't fired straight away
+        /// it's set, but you'll get all events normally for consecutive tab selection changes.
+        /// </summary>
+        /// <param name="listener">a listener for monitoring changes in tab selection.</param>
+        /// <param name="shouldFireInitially">whether the listener should be fired the first time it's set.</param>
+        public void SetOnTabSelectListener(IOnTabSelectListener listener,bool shouldFireInitially) {
             onTabSelectListener = listener;
 
-            if(onTabSelectListener != null && TabCount > 0) {
+            if(shouldFireInitially && listener != null && TabCount > 0) {
                 listener.OnTabSelected(CurrentTabId);
             }
         }
@@ -412,12 +439,29 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="position">the position to select.</param>
         public void SelectTabAtPosition(int position) {
+            SelectTabAtPosition(position,false);
+        }
+
+        /// <summary>
+        /// Select a tab at the specified position.
+        /// </summary>
+        /// <param name="position">the position to select.</param>
+        /// <param name="animate">should the tab change be animated or not.</param>
+        public void SelectTabAtPosition(int position,bool animate) {
             if(position > TabCount - 1 || position < 0) {
                 throw new IndexOutOfBoundsException("Can't select tab at position " +
                         position + ". This BottomBar has no items at that position.");
             }
 
-            selectTabAtPosition(position,false);
+            BottomBarTab oldTab = CurrentTab;
+            BottomBarTab newTab = GetTabAtPosition(position);
+
+            oldTab.Deselect(animate);
+            newTab.Select(animate);
+
+            updateSelectedTab(position);
+            shiftingMagic(oldTab,newTab,animate);
+            handleBackgroundColorChange(newTab,animate);
         }
 
         /// <summary>
@@ -428,8 +472,8 @@ namespace BottomBarSharp {
         public BottomBarTab GetTabAtPosition(int position) {
             View child = tabContainer.GetChildAt(position);
 
-            if(child is FrameLayout) {
-                return findTabInLayout((FrameLayout)child);
+            if(child is BadgeContainer) {
+                return findTabInLayout((BadgeContainer)child);
             }
 
             return (BottomBarTab)child;
@@ -459,7 +503,8 @@ namespace BottomBarSharp {
         /// <param name="alpha"></param>
         public void SetInActiveTabAlpha(float alpha) {
             inActiveTabAlpha = alpha;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.InActiveAlpha = inActiveTabAlpha);
         }
 
         /// <summary>
@@ -468,7 +513,8 @@ namespace BottomBarSharp {
         /// <param name="alpha"></param>
         public void SetActiveTabAlpha(float alpha) {
             activeTabAlpha = alpha;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.ActiveAlpha = activeTabAlpha);
         }
 
         /// <summary>
@@ -477,7 +523,8 @@ namespace BottomBarSharp {
         /// <param name="color"></param>
         public void SetInActiveTabColor(int color) {
             inActiveTabColor = color;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.InActiveColor = inActiveTabColor);
         }
 
         /// <summary>
@@ -486,16 +533,18 @@ namespace BottomBarSharp {
         /// <param name="color"></param>
         public void SetActiveTabColor(int color) {
             activeTabColor = color;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.ActiveColor = activeTabColor);
         }
 
         /// <summary>
-        /// Set bagde color for bagdeable tab
+        /// Set background color for the badge.
         /// </summary>
         /// <param name="color"></param>
         public void SetBadgeBackgroundColor(int color) {
             badgeBackgroundColor = color;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.BadgeBackgroundColor = badgeBackgroundColor);
         }
 
         /// <summary>
@@ -504,7 +553,8 @@ namespace BottomBarSharp {
         /// <param name="textAppearance"></param>
         public void SetTabTitleTextAppearance(int textAppearance) {
             titleTextAppearance = textAppearance;
-            refreshTabs();
+
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.TitleTextAppearanceResId = titleTextAppearance);
         }
 
         /// <summary>
@@ -527,23 +577,17 @@ namespace BottomBarSharp {
         /// <param name="typeface"></param>
         public void SetTabTitleTypeface(Typeface typeface) {
             titleTypeFace = typeface;
-            refreshTabs();
-        }
 
-        private void refreshTabs() {
-            if(TabCount > 0) {
-                BottomBarTabConfig newConfig = getTabConfig();
-
-                for(int i = 0;i < TabCount;i++) {
-                    BottomBarTab tab = GetTabAtPosition(i);
-                    tab.SetConfig(newConfig);
-                }
-            }
+            batchPropertyApplier.ApplyToAllTabs(tab => tab.TitleTypeFace = titleTypeFace);
         }
 
         protected override void OnLayout(bool changed,int left,int top,int right,int bottom) {
             base.OnLayout(changed,left,top,right,bottom);
             if(changed) {
+                if(!isTabletMode) {
+                    resizeTabsToCorrectSizes(currentTabs);
+                }
+
                 updateTitleBottomPadding();
 
                 if(isShy()) {
@@ -557,15 +601,15 @@ namespace BottomBarSharp {
         }
 
         private void updateTitleBottomPadding() {
-            if(tabContainer == null) {
+            int tabCount = TabCount;
+
+            if(tabContainer == null || tabCount == 0 || !isShiftingMode()) {
                 return;
             }
 
-            int childCount = TabCount;
-
-            for(int i = 0;i < childCount;i++) {
-                View tab = tabContainer.GetChildAt(i);
-                var title = tab.FindViewById<TextView>(Resource.Id.bb_bottom_bar_title);
+            for(int i = 0;i < tabCount;i++) {
+                BottomBarTab tab = GetTabAtPosition(i);
+                TextView title = tab.TitleView;
 
                 if(title == null) {
                     continue;
@@ -654,7 +698,7 @@ namespace BottomBarSharp {
                 ignoreTabReselectionListener = true;
 
                 int restoredPosition = savedInstanceState.GetInt(StateCurrentSelectedTab,CurrentTabPosition);
-                selectTabAtPosition(restoredPosition,false);
+                SelectTabAtPosition(restoredPosition,false);
             }
         }
 
@@ -696,18 +740,6 @@ namespace BottomBarSharp {
             }
 
             return true;
-        }
-
-        private void selectTabAtPosition(int position,bool animate) {
-            BottomBarTab oldTab = CurrentTab;
-            BottomBarTab newTab = GetTabAtPosition(position);
-
-            oldTab.Deselect(animate);
-            newTab.Select(animate);
-
-            updateSelectedTab(position);
-            shiftingMagic(oldTab,newTab,animate);
-            handleBackgroundColorChange(newTab,false);
         }
 
         private void updateSelectedTab(int newPosition) {

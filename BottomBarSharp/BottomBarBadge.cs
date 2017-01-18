@@ -10,8 +10,6 @@ using Android.Widget;
 namespace BottomBarSharp {
     public class BottomBarBadge : TextView {
 
-        const string StateCount = "STATE_BADGE_COUNT_FOR_TAB_";
-
         private int _count;
         /// <summary>
         /// Get the currently showing count for this Badge.
@@ -31,8 +29,6 @@ namespace BottomBarSharp {
         /// Is this badge currently visible?
         /// </summary>
         internal bool IsVisible { get; private set; }
-
-        private FrameLayout badgeContainer;
 
         internal BottomBarBadge(Context context) : base(context) { }
 
@@ -84,7 +80,7 @@ namespace BottomBarSharp {
             var tabContainer = tab.Parent as ViewGroup;
             tabContainer.RemoveView(tab);
 
-            badgeContainer = new FrameLayout(Context);
+            var badgeContainer = new BadgeContainer(Context);
             badgeContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent,ViewGroup.LayoutParams.WrapContent);
 
             badgeContainer.AddView(tab);
@@ -101,7 +97,7 @@ namespace BottomBarSharp {
         }
 
         internal void RemoveFromTab(BottomBarTab tab) {
-            FrameLayout badgeAndTabContainer = Parent as FrameLayout;
+            BadgeContainer badgeAndTabContainer = Parent as BadgeContainer;
             ViewGroup originalTabContainer = badgeAndTabContainer.Parent as ViewGroup;
 
             badgeAndTabContainer.RemoveView(tab);
@@ -114,11 +110,7 @@ namespace BottomBarSharp {
             ViewGroup.LayoutParams parameters = LayoutParameters;
 
             int size = Math.Max(Width,Height);
-            float xOffset = iconView.Width;
-
-            if(tab.Type == BottomBarTabType.Tablet) {
-                xOffset /= 1.25f;
-            }
+            float xOffset = (float)(iconView.Width / 1.25);
 
             SetX(iconView.GetX() + xOffset);
             TranslationY = 10;
@@ -138,14 +130,5 @@ namespace BottomBarSharp {
             }
         }
 
-        internal Bundle SaveState(int tabIndex) {
-            Bundle state = new Bundle();
-            state.PutInt(StateCount + tabIndex,Count);
-            return state;
-        }
-
-        internal void RestoreState(Bundle bundle,int tabIndex) {
-            Count = bundle.GetInt(StateCount + tabIndex,Count);
-        }
     }
 }
