@@ -106,7 +106,7 @@ namespace BottomBarSharp {
 
         public BottomBar(Context context,IAttributeSet attrs) : base(context,attrs) {
             init(context,attrs);
-            setItems(tabXmlResource);
+            SetItems(tabXmlResource);
         }
 
         private void init(Context context,IAttributeSet attrs) {
@@ -205,8 +205,8 @@ namespace BottomBarSharp {
         /// Set the items for the BottomBar from XML Resource.
         /// </summary>
         /// <param name="xmlRes"></param>
-        public void setItems(int xmlRes) {
-            setItems(xmlRes,null);
+        public void SetItems(int xmlRes) {
+            SetItems(xmlRes,null);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="xmlRes"></param>
         /// <param name="defaultTabConfig"></param>
-        public void setItems(int xmlRes,BottomBarTabConfig defaultTabConfig) {
+        public void SetItems(int xmlRes,BottomBarTabConfig defaultTabConfig) {
             if(xmlRes == 0) {
                 throw new RuntimeException("No items specified for the BottomBar!");
             }
@@ -226,6 +226,42 @@ namespace BottomBarSharp {
 
             TabParser parser = new TabParser(Context,defaultTabConfig,xmlRes);
             updateItems(parser.Tabs);
+        }
+
+        /// <summary>
+        /// To added, Set the item for the BottomBar from dynamic item
+        /// </summary>
+        /// <param name="tabs"></param>
+        public void SetItems(List<BottomBarTab> tabs) {
+            updateItems(tabs);
+        }
+
+        /// <summary>
+        /// To added, Clear the BottomBarTab for dynamic to set item
+        /// </summary>
+        public void ClearItems() {
+            tabContainer.RemoveAllViews();
+        }
+
+        /// <summary>
+        /// To added, new BottomBarTab with this instance for dynamic to set item, this method is not adding to BottomBar
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="icon"></param>
+        /// <param name="title"></param>
+        /// <param name="defaultTabConfig"></param>
+        /// <returns></returns>
+        public BottomBarTab NewTab(int id,int icon,string title,BottomBarTabConfig defaultTabConfig = null) {
+            if(defaultTabConfig == null) {
+                defaultTabConfig = getTabConfig();
+            }
+
+            var tab = new BottomBarTab(Context);
+            tab.SetConfig(defaultTabConfig);
+            tab.Id = id;
+            tab.IconResId = icon;
+            tab.Title = title;
+            return tab;
         }
 
         private BottomBarTabConfig getTabConfig() {
@@ -366,7 +402,7 @@ namespace BottomBarSharp {
         /// Select the tab with the corresponding id.
         /// </summary>
         /// <param name="tabResId"></param>
-        public void selectTabWithId(int tabResId) {
+        public void SelectTabWithId(int tabResId) {
             int tabPosition = FindPositionForTabWithId(tabResId);
             SelectTabAtPosition(tabPosition);
         }
