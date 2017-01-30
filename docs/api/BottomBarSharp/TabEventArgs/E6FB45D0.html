@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/BottomBarSharp/assets/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/BottomBarSharp/assets/img/favicon.ico" type="image/x-icon">
-    <title>BottomBarSharp - API - TabEvent Class</title>
+    <title>BottomBarSharp - API - TabEventArgs.TabEventArgs(int) Constructor</title>
     <link href="/BottomBarSharp/assets/css/mermaid.css" rel="stylesheet">
     <link href="/BottomBarSharp/assets/css/highlight.css" rel="stylesheet">
     <link href="/BottomBarSharp/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -75,10 +75,9 @@
         <aside class="main-sidebar ">
             <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
                 	
-	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Summary">Summary</a></p>
-<p><a href="#Syntax">Syntax</a></p>
-<p><a href="#Constructors">Constructors</a></p>
-<p><a href="#Properties">Properties</a></p>
+	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Syntax">Syntax</a></p>
+<p><a href="#Parameters">Parameters</a></p>
+<p><a href="#ReturnValue">Return Value</a></p>
 <hr class="infobar-hidden">
 </div>
 
@@ -131,21 +130,13 @@
                     
 			<li class="header">Namespace</li>
 		<li><a href="/BottomBarSharp/api/BottomBarSharp">BottomBarSharp</a></li>
+		<li class="header">Type</li>
+		<li><a href="/BottomBarSharp/api/BottomBarSharp/TabEventArgs">TabEventArgs</a></li>
 		<li role="separator" class="divider"></li>
-			<li class="header">Enum Types</li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBarTabType">BottomBarTabType</a></li>
-			<li class="header">Class Types</li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BadgeContainer">BadgeContainer</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBar">BottomBar</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBarBadge">BottomBarBadge</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBarTab">BottomBarTab</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/BottomBarTabConfig">BottomBarTabConfig</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/Resource">Resource</a></li>
-				<li class="selected"><a href="/BottomBarSharp/api/BottomBarSharp/TabEvent">TabEvent</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/TabParser">TabParser</a></li>
-			<li class="header">Interface Types</li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/IOnTabReselectListener">I<wbr>On<wbr>Tab<wbr>Reselect<wbr>Listener</a></li>
-				<li><a href="/BottomBarSharp/api/BottomBarSharp/IOnTabSelectListener">IOnTabSelectListener</a></li>
+			<li class="header">Constructors</li>
+				<li class="selected"><a href="/BottomBarSharp/api/BottomBarSharp/TabEventArgs/E6FB45D0.html">TabEventArgs<wbr>(int)<wbr></a></li>
+			<li class="header">Property Members</li>
+				<li><a href="/BottomBarSharp/api/BottomBarSharp/TabEventArgs/2D5A3A71.html">TabId</a></li>
 
 
                 </ul>
@@ -159,104 +150,70 @@
 
 
 <section class="content-header">
-	<h1>TabEvent <small>Class</small></h1>
+			<h3><a href="/BottomBarSharp/api/BottomBarSharp/TabEventArgs">TabEventArgs</a>.</h3>
+	<h1>TabEventArgs<wbr>(int)<wbr> <small>Constructor</small></h1>
 </section>
 <section class="content">
 	
 	
-		<h1 id="Summary">Summary</h1>
-	<div class="lead">
-    Tab Event for seleceted or reselected
-    </div>
-
+	
 		<div class="panel panel-default">
-  			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-6">
-						<dl class="dl-horizontal">		
-
-								<dt>Namespace</dt>
-								<dd><a href="/BottomBarSharp/api/BottomBarSharp">BottomBarSharp</a></dd>
-											
-							
-								<dt>Base Types</dt>
-								<dd>
-									<ul class="list-unstyled">										
-											<li>object</li>								
-											<li>EventArgs</li>								
-									</ul>
-								</dd>				
-							
-							
-						</dl>
-					</div>		
-					<div class="col-md-6">
-						<div class="mermaid">
-							graph TD
-	Base0["EventArgs"]--&gt;Type
-	Base1["object"]--&gt;Base0
-	Type["TabEvent"]
-class Type type-node
-
-						</div>
-					</div>
-				</div>
+  			<div class="panel-body">	
+				<dl class="dl-horizontal">	
+						
+						<dt>Namespace</dt>
+						<dd><a href="/BottomBarSharp/api/BottomBarSharp">BottomBarSharp</a></dd>
+					
+						<dt>Containing Type</dt>
+						<dd><a href="/BottomBarSharp/api/BottomBarSharp/TabEventArgs">TabEventArgs</a></dd>		
+					
+				</dl>
   			</div>
 		</div>
 
 	<h1 id="Syntax">Syntax</h1>
-	<pre><code>public class TabEvent : EventArgs</code></pre>
+	<pre><code>public TabEventArgs(int tabId)</code></pre>
 
 
 
 
+	<h1 id="Parameters">Parameters</h1>
+	<div class="box">
+		<div class="box-body no-padding table-responsive">
+			<table class="table table-striped table-hover three-cols">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+					<tbody><tr>
+						<td>tabId</td>
+						<td>int</td>
+						<td></td>
+					</tr>
+			</tbody></table>
+		</div>
+	</div>	
 
-			<h1 id="Constructors">Constructors</h1>
-			<div class="box">
-				<div class="box-body no-padding table-responsive">
-					<table class="table table-striped table-hover two-cols">
-						<thead>
-							<tr>
-								<th>Name</th>
-									<th>Summary</th>
-							</tr>
-						</thead>
-							<tbody><tr>
-								<td><a href="/BottomBarSharp/api/BottomBarSharp/TabEvent/ECC029A6.html">TabEvent<wbr>(int)<wbr></a></td>
-									<td></td>
-							</tr>
-					</tbody></table>
-				</div>
-			</div>
-		
-
-
-
-			<h1 id="Properties">Properties</h1>
-			<div class="box">
-				<div class="box-body no-padding table-responsive">
-					<table class="table table-striped table-hover three-cols">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Value</th>
-								<th>Summary</th>
-							</tr>
-						</thead>
-							<tbody><tr>
-								<td><a href="/BottomBarSharp/api/BottomBarSharp/TabEvent/811CE0DC.html">TabId</a></td>
-								<td>int</td>
-								<td>
-									<div>
-    An event tab id
-    </div>
-								</td>
-							</tr>
-					</tbody></table>
-				</div>
-			</div>
-		
-
+	<h1 id="ReturnValue">Return Value</h1>
+	<div class="box">
+		<div class="box-body no-padding table-responsive">
+			<table class="table table-striped table-hover two-cols">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody><tr>
+					<td>void</td>
+					<td></td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div>	
 
 
 
