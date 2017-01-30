@@ -6,6 +6,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Content;
 using Android.Support.V4.View;
@@ -111,6 +112,8 @@ namespace BottomBarSharp {
         public BottomBar(Context context,IAttributeSet attrs) : base(context,attrs) {
             init(context,attrs);
         }
+
+        public BottomBar(IntPtr javaReference,JniHandleOwnership transfer) : base(javaReference,transfer) { }
 
         private void init(Context context,IAttributeSet attrs) {
             batchPropertyApplier = new BatchTabPropertyApplier(this);
