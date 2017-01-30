@@ -15,14 +15,14 @@ namespace BottomBarSharp {
     /// <summary>
     /// Tab Event for seleceted or reselected
     /// </summary>
-    public class TabEvent :EventArgs {
+    public class TabEventArgs : EventArgs {
 
         /// <summary>
         /// An event tab id
         /// </summary>
         public int TabId { get; }
 
-        public TabEvent(int tabId) {
+        public TabEventArgs(int tabId) {
             TabId = tabId;
         }
     }

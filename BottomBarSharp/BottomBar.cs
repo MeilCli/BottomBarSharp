@@ -75,12 +75,12 @@ namespace BottomBarSharp {
         /// <summary>
         /// An event of tab selected
         /// </summary>
-        public event EventHandler<TabEvent> TabSelect;
+        public event EventHandler<TabEventArgs> TabSelect;
 
         /// <summary>
         /// An event of tab reselected
         /// </summary>
-        public event EventHandler<TabEvent> TabReSelect;
+        public event EventHandler<TabEventArgs> TabReSelect;
 
         private bool isComingFromRestoredState;
         private bool ignoreTabReselectionListener;
@@ -750,10 +750,10 @@ namespace BottomBarSharp {
 
             if(newPosition != CurrentTabPosition) {
                 onTabSelectListener?.OnTabSelected(newTabId);
-                TabSelect?.Invoke(this,new TabEvent(newTabId));
+                TabSelect?.Invoke(this,new TabEventArgs(newTabId));
             } else if(!ignoreTabReselectionListener) {
                 onTabReselectListener?.OnTabReSelected(newTabId);
-                TabReSelect?.Invoke(this,new TabEvent(newTabId));
+                TabReSelect?.Invoke(this,new TabEventArgs(newTabId));
             }
 
             CurrentTabPosition = newPosition;
