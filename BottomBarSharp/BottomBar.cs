@@ -245,6 +245,9 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="tabs"></param>
         public void SetItems(List<BottomBarTab> tabs) {
+            for(int i = 0;i < tabs.Count;i++) {
+                tabs[i].IndexInContainer = i;
+            }
             updateItems(tabs);
         }
 
