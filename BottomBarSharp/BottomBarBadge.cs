@@ -20,9 +20,7 @@ namespace BottomBarSharp {
         /// Set the unread / new item / whatever count for this Badge.
         /// </summary>
         internal int Count {
-            get {
-                return _count;
-            }
+            get => _count;
             set {
                 _count = value;
                 Text = value.ToString();

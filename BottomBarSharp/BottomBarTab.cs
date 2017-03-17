@@ -45,9 +45,7 @@ namespace BottomBarSharp {
 
         private string _title;
         public string Title {
-            get {
-                return _title;
-            }
+            get => _title;
             set {
                 _title = value;
                 updateTitle();
@@ -56,9 +54,7 @@ namespace BottomBarSharp {
 
         private float _inActiveAlpha;
         public float InActiveAlpha {
-            get {
-                return _inActiveAlpha;
-            }
+            get => _inActiveAlpha;
             set {
                 _inActiveAlpha = value;
                 if (!IsActive) {
@@ -69,9 +65,7 @@ namespace BottomBarSharp {
 
         private float _activeAlpha;
         public float ActiveAlpha {
-            get {
-                return _activeAlpha;
-            }
+            get => _activeAlpha;
             set {
                 _activeAlpha = value;
                 if (IsActive) {
@@ -82,9 +76,7 @@ namespace BottomBarSharp {
 
         private int _inActiveColor;
         public int InActiveColor {
-            get {
-                return _inActiveColor;
-            }
+            get => _inActiveColor;
             set {
                 _inActiveColor = value;
                 if (!IsActive) {
@@ -95,9 +87,7 @@ namespace BottomBarSharp {
 
         private int _activeColor;
         public int ActiveColor {
-            get {
-                return _activeColor;
-            }
+            get => _activeColor;
             set {
                 _activeColor = value;
                 if (IsActive) {
@@ -110,9 +100,7 @@ namespace BottomBarSharp {
 
         private int _badgeBackgroundColor;
         public int BadgeBackgroundColor {
-            get {
-                return _badgeBackgroundColor;
-            }
+            get => _badgeBackgroundColor;
             set {
                 _badgeBackgroundColor = value;
                 Badge?.SetColoredCircleBackground(value);
@@ -129,9 +117,7 @@ namespace BottomBarSharp {
 
         private int _titleTextAppearanceResId;
         public int TitleTextAppearanceResId {
-            get {
-                return _titleTextAppearanceResId;
-            }
+            get => _titleTextAppearanceResId;
             internal set {
                 _titleTextAppearanceResId = value;
                 updateCustomTextAppearance();
@@ -140,20 +126,14 @@ namespace BottomBarSharp {
 
         private Typeface _titleTypeFace;
         public Typeface TitleTypeFace {
-            get {
-                return _titleTypeFace;
-            }
+            get => _titleTypeFace;
             set {
                 _titleTypeFace = value;
                 updateCustomTypeface();
             }
         }
 
-        public ViewGroup OuterView {
-            get {
-                return Parent as ViewGroup;
-            }
-        }
+        public ViewGroup OuterView => Parent as ViewGroup;
 
         internal int CurrentDisplayedIconColor {
             get {
