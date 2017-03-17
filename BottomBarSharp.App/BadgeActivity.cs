@@ -1,4 +1,3 @@
-
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -6,7 +5,7 @@ using Android.Widget;
 using BottomBarSharp;
 
 namespace BottomBarSharpApp {
-    [Activity(Label = "BadgeActivity",Theme = "@style/AppTheme")]
+    [Activity(Label = "BadgeActivity", Theme = "@style/AppTheme")]
     public class BadgeActivity : AppCompatActivity {
 
         private TextView messageView;
@@ -19,12 +18,12 @@ namespace BottomBarSharpApp {
             messageView = FindViewById<TextView>(Resource.Id.messageView);
 
             var bottomBar = FindViewById<BottomBar>(Resource.Id.bottomBar);
-            bottomBar.TabSelect += (s,e) => {
-                messageView.Text = TabMessage.Get(e.TabId,false);
+            bottomBar.TabSelect += (s, e) => {
+                messageView.Text = TabMessage.Get(e.TabId, false);
             };
 
-            bottomBar.TabReSelect += (s,e) => {
-                Toast.MakeText(ApplicationContext,TabMessage.Get(e.TabId,true),ToastLength.Long).Show();
+            bottomBar.TabReSelect += (s, e) => {
+                Toast.MakeText(ApplicationContext, TabMessage.Get(e.TabId, true), ToastLength.Long).Show();
             };
 
             BottomBarTab nearby = bottomBar.GetTabWithId(Resource.Id.tab_nearby);

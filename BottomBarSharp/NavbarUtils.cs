@@ -5,16 +5,17 @@ using Android.Util;
 using Android.Views;
 
 namespace BottomBarSharp {
+
     sealed class NavbarUtils {
 
         internal static int GetNavbarHeight(Context context) {
             var res = context.Resources;
 
-            int navBarIdentifier = res.GetIdentifier("navigation_bar_height","dimen","android");
+            int navBarIdentifier = res.GetIdentifier("navigation_bar_height", "dimen", "android");
 
             int navBarHeight = 0;
 
-            if(navBarIdentifier > 0) {
+            if (navBarIdentifier > 0) {
                 navBarHeight = res.GetDimensionPixelSize(navBarIdentifier);
             }
 
@@ -33,7 +34,7 @@ namespace BottomBarSharp {
         private static bool hasSoftKeys(Context context) {
             bool hasSoftwareKeys = true;
 
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1) {
                 Display d = context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>().DefaultDisplay;
 
                 var realDisplayMetrics = new DisplayMetrics();
@@ -49,7 +50,7 @@ namespace BottomBarSharp {
                 int displayWidth = displayMetrics.WidthPixels;
 
                 hasSoftwareKeys = (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
-            } else if(Build.VERSION.SdkInt >= BuildVersionCodes.IceCreamSandwich) {
+            } else if (Build.VERSION.SdkInt >= BuildVersionCodes.IceCreamSandwich) {
                 bool hasMenuKey = ViewConfiguration.Get(context).HasPermanentMenuKey;
                 bool hasBackKey = KeyCharacterMap.DeviceHasKey(Keycode.Back);
                 hasSoftwareKeys = !hasMenuKey && !hasBackKey;

@@ -1,10 +1,10 @@
 namespace BottomBarSharpApp {
     public class TabMessage {
 
-        public static string Get(int menuItemId,bool isReselection) {
+        public static string Get(int menuItemId, bool isReselection) {
             string message = "Content for ";
 
-            switch(menuItemId) {
+            switch (menuItemId) {
                 case Resource.Id.tab_recents:
                     message += "recents";
                     break;
@@ -22,7 +22,7 @@ namespace BottomBarSharpApp {
                     break;
             }
 
-            if(isReselection) {
+            if (isReselection) {
                 message += " WAS RESELECTED! YAY!";
             }
 

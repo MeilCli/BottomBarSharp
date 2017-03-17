@@ -8,6 +8,9 @@ using Android.Views;
 using Android.Widget;
 using Java.Lang;
 
+// disable not found xml document warning
+#pragma warning disable 1591
+
 namespace BottomBarSharp {
 
     public enum BottomBarTabType {
@@ -27,11 +30,11 @@ namespace BottomBarSharp {
 
     public class BottomBarTab : LinearLayout {
 
-        private const string StateBadgeCount = "STATE_BADGE_COUNT_FOR_TAB_";
+        private const string stateBadgeCount = "STATE_BADGE_COUNT_FOR_TAB_";
 
-        private const long AnimationDuration = 150;
-        private const float ActiveTitleScale = 1;
-        private const float InactiveFixedTitleScale = 0.86f;
+        private const long animationDuration = 150;
+        private const float activeTitleScale = 1;
+        private const float inactiveFixedTitleScale = 0.86f;
 
         private readonly int sixDps;
         private readonly int eightDps;
@@ -58,7 +61,7 @@ namespace BottomBarSharp {
             }
             set {
                 _inActiveAlpha = value;
-                if(!IsActive) {
+                if (!IsActive) {
                     setAlphas(value);
                 }
             }
@@ -71,7 +74,7 @@ namespace BottomBarSharp {
             }
             set {
                 _activeAlpha = value;
-                if(IsActive) {
+                if (IsActive) {
                     setAlphas(value);
                 }
             }
@@ -84,7 +87,7 @@ namespace BottomBarSharp {
             }
             set {
                 _inActiveColor = value;
-                if(!IsActive) {
+                if (!IsActive) {
                     setColors(value);
                 }
             }
@@ -97,7 +100,7 @@ namespace BottomBarSharp {
             }
             set {
                 _activeColor = value;
-                if(IsActive) {
+                if (IsActive) {
                     setColors(value);
                 }
             }
@@ -155,7 +158,7 @@ namespace BottomBarSharp {
         internal int CurrentDisplayedIconColor {
             get {
                 var tag = IconView.Tag;
-                if(tag is Java.Lang.Integer) {
+                if (tag is Java.Lang.Integer) {
                     return (tag as Java.Lang.Integer).IntValue();
                 }
                 return 0;
@@ -167,7 +170,7 @@ namespace BottomBarSharp {
         internal int CurrentDisplayedTextAppearance {
             get {
                 var tag = TitleView.Tag;
-                if(TitleView != null && tag is Java.Lang.Integer) {
+                if (TitleView != null && tag is Java.Lang.Integer) {
                     return (tag as Java.Lang.Integer).IntValue();
                 }
                 return 0;
@@ -177,9 +180,9 @@ namespace BottomBarSharp {
         internal bool HasActiveBadge => Badge != null;
 
         internal BottomBarTab(Context context) : base(context) {
-            sixDps = MiscUtils.DpToPixel(context,6);
-            eightDps = MiscUtils.DpToPixel(context,8);
-            sixteenDps = MiscUtils.DpToPixel(context,16);
+            sixDps = MiscUtils.DpToPixel(context, 6);
+            eightDps = MiscUtils.DpToPixel(context, 8);
+            sixteenDps = MiscUtils.DpToPixel(context, 16);
         }
 
         internal void SetConfig(BottomBarTabConfig config) {
@@ -194,15 +197,15 @@ namespace BottomBarSharp {
         }
 
         internal void PrepareLayout() {
-            Inflate(Context,GetLayoutResource(),this);
+            Inflate(Context, GetLayoutResource(), this);
             Orientation = Orientation.Vertical;
             SetGravity(GravityFlags.CenterHorizontal);
-            LayoutParameters = new LayoutParams(LayoutParams.WrapContent,LayoutParams.WrapContent);
+            LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
 
             IconView = FindViewById<AppCompatImageView>(Resource.Id.bb_bottom_bar_icon);
             IconView.SetImageResource(IconResId);
 
-            if(Type != BottomBarTabType.Tablet) {
+            if (Type != BottomBarTabType.Tablet) {
                 TitleView = FindViewById<TextView>(Resource.Id.bb_bottom_bar_title);
                 updateTitle();
             }
@@ -212,14 +215,14 @@ namespace BottomBarSharp {
         }
 
         private void updateTitle() {
-            if(TitleView != null) {
+            if (TitleView != null) {
                 TitleView.Text = Title;
             }
         }
 
         internal int GetLayoutResource() {
             int layoutResource;
-            switch(Type) {
+            switch (Type) {
                 case BottomBarTabType.Fixed:
                     layoutResource = Resource.Layout.bb_bottom_bar_item_fixed;
                     break;
@@ -237,28 +240,30 @@ namespace BottomBarSharp {
         }
 
         private void updateCustomTextAppearance() {
-            if(TitleView == null || TitleTextAppearanceResId == 0) {
+            if (TitleView == null || TitleTextAppearanceResId == 0) {
                 return;
             }
 
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.M) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M) {
                 TitleView.SetTextAppearance(TitleTextAppearanceResId);
             } else {
-                TitleView.SetTextAppearance(Context,TitleTextAppearanceResId);
+#pragma warning disable 0618
+                TitleView.SetTextAppearance(Context, TitleTextAppearanceResId);
+#pragma warning restore 0618
             }
 
             TitleView.Tag = new Java.Lang.Integer(TitleTextAppearanceResId);
         }
 
         private void updateCustomTypeface() {
-            if(TitleTypeFace != null && TitleView != null) {
+            if (TitleTypeFace != null && TitleView != null) {
                 TitleView.Typeface = TitleTypeFace;
             }
         }
 
         public void SetBadgeCount(int count) {
-            if(count <= 0) {
-                if(Badge != null) {
+            if (count <= 0) {
+                if (Badge != null) {
                     Badge.RemoveFromTab(this);
                     Badge = null;
                 }
@@ -266,9 +271,9 @@ namespace BottomBarSharp {
                 return;
             }
 
-            if(Badge == null) {
+            if (Badge == null) {
                 Badge = new BottomBarBadge(Context);
-                Badge.AttachToTab(this,BadgeBackgroundColor);
+                Badge.AttachToTab(this, BadgeBackgroundColor);
             }
 
             Badge.Count = count;
@@ -285,13 +290,13 @@ namespace BottomBarSharp {
         internal void Select(bool animate) {
             IsActive = true;
 
-            if(animate) {
-                setTopPaddingAnimated(IconView.PaddingTop,sixDps);
+            if (animate) {
+                setTopPaddingAnimated(IconView.PaddingTop, sixDps);
                 animateIcon(ActiveAlpha);
-                animateTitle(ActiveTitleScale,ActiveAlpha);
-                animateColors(InActiveColor,ActiveColor);
+                animateTitle(activeTitleScale, ActiveAlpha);
+                animateColors(InActiveColor, ActiveColor);
             } else {
-                setTitleScale(ActiveTitleScale);
+                setTitleScale(activeTitleScale);
                 setTopPadding(sixDps);
                 setColors(ActiveColor);
                 setAlphas(ActiveAlpha);
@@ -305,14 +310,14 @@ namespace BottomBarSharp {
 
             bool isShifting = Type == BottomBarTabType.Shifting;
 
-            float scale = isShifting ? 0 : InactiveFixedTitleScale;
+            float scale = isShifting ? 0 : inactiveFixedTitleScale;
             int iconPaddingTop = isShifting ? sixteenDps : eightDps;
 
-            if(animate) {
-                setTopPaddingAnimated(IconView.PaddingTop,iconPaddingTop);
-                animateTitle(scale,InActiveAlpha);
+            if (animate) {
+                setTopPaddingAnimated(IconView.PaddingTop, iconPaddingTop);
+                animateTitle(scale, InActiveAlpha);
                 animateIcon(InActiveAlpha);
-                animateColors(ActiveColor,InActiveColor);
+                animateColors(ActiveColor, InActiveColor);
             } else {
                 setTitleScale(scale);
                 setTopPadding(iconPaddingTop);
@@ -320,16 +325,16 @@ namespace BottomBarSharp {
                 setAlphas(InActiveAlpha);
             }
 
-            if(!isShifting && Badge != null) {
+            if (!isShifting && Badge != null) {
                 Badge.Show();
             }
         }
 
-        private void animateColors(int previousColor,int color) {
+        private void animateColors(int previousColor, int color) {
             var anim = new ValueAnimator();
-            anim.SetIntValues(previousColor,color);
+            anim.SetIntValues(previousColor, color);
             anim.SetEvaluator(new ArgbEvaluator());
-            anim.Update += (s,e) => {
+            anim.Update += (s, e) => {
                 setColors((e.Animation.AnimatedValue as Java.Lang.Integer).IntValue());
             };
             anim.SetDuration(150);
@@ -337,7 +342,7 @@ namespace BottomBarSharp {
         }
 
         private void setColors(int color) {
-            if(IconView != null) {
+            if (IconView != null) {
                 IconView.SetColorFilter(new Color(color));
                 IconView.Tag = new Java.Lang.Integer(color);
             }
@@ -346,20 +351,20 @@ namespace BottomBarSharp {
         }
 
         private void setAlphas(float alpha) {
-            if(IconView != null) {
-                ViewCompat.SetAlpha(IconView,alpha);
+            if (IconView != null) {
+                ViewCompat.SetAlpha(IconView, alpha);
             }
 
-            if(TitleView != null) {
-                ViewCompat.SetAlpha(TitleView,alpha);
+            if (TitleView != null) {
+                ViewCompat.SetAlpha(TitleView, alpha);
             }
         }
 
-        internal void UpdateWidth(float endWidth,bool animated) {
-            if(!animated) {
+        internal void UpdateWidth(float endWidth, bool animated) {
+            if (!animated) {
                 LayoutParameters.Width = (int)endWidth;
 
-                if(!IsActive && Badge != null) {
+                if (!IsActive && Badge != null) {
                     Badge.AdjustPositionAndSize(this);
                     Badge.Show();
                 }
@@ -368,18 +373,18 @@ namespace BottomBarSharp {
 
             float start = Width;
 
-            var animator = ValueAnimator.OfFloat(start,endWidth);
+            var animator = ValueAnimator.OfFloat(start, endWidth);
             animator.SetDuration(150);
-            animator.Update += (s,e) => {
+            animator.Update += (s, e) => {
                 var parameters = LayoutParameters;
-                if(parameters == null)
+                if (parameters == null)
                     return;
 
                 parameters.Width = Java.Lang.Math.Round((animator.AnimatedValue as Java.Lang.Float).FloatValue());
                 LayoutParameters = parameters;
             };
-            animator.AnimationEnd += (s,e) => {
-                if(!IsActive && Badge != null) {
+            animator.AnimationEnd += (s, e) => {
+                if (!IsActive && Badge != null) {
                     Badge.AdjustPositionAndSize(this);
                     Badge.Show();
                 }
@@ -389,13 +394,13 @@ namespace BottomBarSharp {
 
         private void updateBadgePosition() => Badge?.AdjustPositionAndSize(this);
 
-        private void setTopPaddingAnimated(int start,int end) {
-            if(Type == BottomBarTabType.Tablet) {
+        private void setTopPaddingAnimated(int start, int end) {
+            if (Type == BottomBarTabType.Tablet) {
                 return;
             }
 
-            var paddingAnimator = ValueAnimator.OfInt(start,end);
-            paddingAnimator.Update += (s,e) => {
+            var paddingAnimator = ValueAnimator.OfInt(start, end);
+            paddingAnimator.Update += (s, e) => {
                 IconView.SetPadding(
                     IconView.PaddingLeft,
                     (e.Animation.AnimatedValue as Java.Lang.Integer).IntValue(),
@@ -403,17 +408,17 @@ namespace BottomBarSharp {
                     IconView.PaddingBottom
                 );
             };
-            paddingAnimator.SetDuration(AnimationDuration);
+            paddingAnimator.SetDuration(animationDuration);
             paddingAnimator.Start();
         }
 
-        private void animateTitle(float finalScale,float finalAlpha) {
-            if(Type == BottomBarTabType.Tablet) {
+        private void animateTitle(float finalScale, float finalAlpha) {
+            if (Type == BottomBarTabType.Tablet) {
                 return;
             }
 
             ViewPropertyAnimatorCompat titleAnimator = ViewCompat.Animate(TitleView)
-                .SetDuration(AnimationDuration)
+                .SetDuration(animationDuration)
                 .ScaleX(finalScale)
                 .ScaleY(finalScale);
             titleAnimator.Alpha(finalAlpha);
@@ -422,13 +427,13 @@ namespace BottomBarSharp {
 
         private void animateIcon(float finalAlpha) {
             ViewCompat.Animate(IconView)
-                    .SetDuration(AnimationDuration)
+                    .SetDuration(animationDuration)
                     .Alpha(finalAlpha)
                     .Start();
         }
 
         private void setTopPadding(int topPadding) {
-            if(Type == BottomBarTabType.Tablet) {
+            if (Type == BottomBarTabType.Tablet) {
                 return;
             }
 
@@ -441,18 +446,18 @@ namespace BottomBarSharp {
         }
 
         private void setTitleScale(float scale) {
-            if(Type == BottomBarTabType.Tablet) {
+            if (Type == BottomBarTabType.Tablet) {
                 return;
             }
 
-            ViewCompat.SetScaleX(TitleView,scale);
-            ViewCompat.SetScaleY(TitleView,scale);
+            ViewCompat.SetScaleX(TitleView, scale);
+            ViewCompat.SetScaleY(TitleView, scale);
         }
 
         protected override IParcelable OnSaveInstanceState() {
-            if(Badge != null) {
+            if (Badge != null) {
                 Bundle bundle = saveState();
-                bundle.PutParcelable("superstate",base.OnSaveInstanceState());
+                bundle.PutParcelable("superstate", base.OnSaveInstanceState());
                 return bundle;
             }
 
@@ -461,13 +466,13 @@ namespace BottomBarSharp {
 
         private Bundle saveState() {
             Bundle outState = new Bundle();
-            outState.PutInt(StateBadgeCount + IndexInContainer,Badge.Count);
+            outState.PutInt(stateBadgeCount + IndexInContainer, Badge.Count);
 
             return outState;
         }
 
         protected override void OnRestoreInstanceState(IParcelable state) {
-            if(state is Bundle) {
+            if (state is Bundle) {
                 var bundle = state as Bundle;
                 restoreState(bundle);
 
@@ -477,7 +482,7 @@ namespace BottomBarSharp {
         }
 
         private void restoreState(Bundle savedInstanceState) {
-            int previousBadgeCount = savedInstanceState.GetInt(StateBadgeCount + IndexInContainer);
+            int previousBadgeCount = savedInstanceState.GetInt(stateBadgeCount + IndexInContainer);
             SetBadgeCount(previousBadgeCount);
         }
     }

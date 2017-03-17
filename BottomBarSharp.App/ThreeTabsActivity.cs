@@ -1,11 +1,11 @@
-
 using Android.App;
 using Android.OS;
 using Android.Widget;
 using BottomBarSharp;
 
 namespace BottomBarSharpApp {
-    [Activity(Label = "ThreeTabsActivity",Theme = "@style/AppTheme")]
+
+    [Activity(Label = "ThreeTabsActivity", Theme = "@style/AppTheme")]
     public class ThreeTabsActivity : Activity {
 
         private TextView messageView;
@@ -18,12 +18,12 @@ namespace BottomBarSharpApp {
             messageView = FindViewById<TextView>(Resource.Id.messageView);
 
             var bottomBar = FindViewById<BottomBar>(Resource.Id.bottomBar);
-            bottomBar.TabSelect += (s,e) => {
-                messageView.Text = TabMessage.Get(e.TabId,false);
+            bottomBar.TabSelect += (s, e) => {
+                messageView.Text = TabMessage.Get(e.TabId, false);
             };
 
-            bottomBar.TabReSelect += (s,e) => {
-                Toast.MakeText(ApplicationContext,TabMessage.Get(e.TabId,true),ToastLength.Long).Show();
+            bottomBar.TabReSelect += (s, e) => {
+                Toast.MakeText(ApplicationContext, TabMessage.Get(e.TabId, true), ToastLength.Long).Show();
             };
         }
     }

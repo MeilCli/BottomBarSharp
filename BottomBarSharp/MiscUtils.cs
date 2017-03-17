@@ -5,11 +5,12 @@ using Android.Widget;
 using Java.Lang;
 
 namespace BottomBarSharp {
+
     class MiscUtils {
 
-        internal static int GetColor(Context context,int color) {
+        internal static int GetColor(Context context, int color) {
             var tv = new TypedValue();
-            context.Theme.ResolveAttribute(color,tv,true);
+            context.Theme.ResolveAttribute(color, tv, true);
             return tv.Data;
         }
 
@@ -19,13 +20,13 @@ namespace BottomBarSharp {
         /// <param name="context">the Context for getting the resources</param>
         /// <param name="dp">dimension in dps</param>
         /// <returns>dimension in pixels</returns>
-        internal static int DpToPixel(Context context,float dp) {
+        internal static int DpToPixel(Context context, float dp) {
             var resources = context.Resources;
             var metrics = resources.DisplayMetrics;
             try {
                 return (int)(dp * ((int)metrics.DensityDpi / 160f));
-            } catch(NoSuchFieldError) {
-                return (int)TypedValue.ApplyDimension(ComplexUnitType.Dip,dp,metrics);
+            } catch (NoSuchFieldError) {
+                return (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, dp, metrics);
             }
         }
 
@@ -35,7 +36,7 @@ namespace BottomBarSharp {
         /// <param name="context">the Context for getting the resources</param>
         /// <param name="px">dimension in pixels</param>
         /// <returns>dimension in dps</returns>
-        internal static int PixelToDp(Context context,int px) {
+        internal static int PixelToDp(Context context, int px) {
             DisplayMetrics displayMetrics = context.Resources.DisplayMetrics;
             return Math.Round(px / (displayMetrics.Xdpi / (int)DisplayMetricsDensity.Default));
         }
@@ -56,11 +57,13 @@ namespace BottomBarSharp {
         /// <param name="textView">a TextView which textAppearance to modify.</param>
         /// <param name="resId">a style resource for the text appearance.</param>
         [SuppressWarnings]
-        internal static void SetTextAppearance(TextView textView,int resId) {
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.M) {
+        internal static void SetTextAppearance(TextView textView, int resId) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M) {
                 textView.SetTextAppearance(resId);
             } else {
-                textView.SetTextAppearance(textView.Context,resId);
+#pragma warning disable 0618
+                textView.SetTextAppearance(textView.Context, resId);
+#pragma warning restore 0618
             }
         }
 

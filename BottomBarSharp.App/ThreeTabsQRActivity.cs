@@ -1,11 +1,10 @@
-
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 using BottomBarSharp;
 
 namespace BottomBarSharpApp {
-    [Activity(Label = "ThreeTabsQRActivity",Theme = "@style/AppTheme.TransNav")]
+    [Activity(Label = "ThreeTabsQRActivity", Theme = "@style/AppTheme.TransNav")]
     public class ThreeTabsQRActivity : AppCompatActivity {
 
         protected override void OnCreate(Bundle savedInstanceState) {
@@ -17,7 +16,7 @@ namespace BottomBarSharpApp {
 
             // We're doing nothing with this listener here this time. Check example usage
             // from ThreeTabsActivity on how to use it.
-            bottomBar.TabSelect += (s,e) => {
+            bottomBar.TabSelect += (s, e) => {
 
             };
         }

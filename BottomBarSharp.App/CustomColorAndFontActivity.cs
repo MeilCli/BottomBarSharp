@@ -1,4 +1,3 @@
-
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -7,7 +6,7 @@ using BottomBarSharp;
 
 namespace BottomBarSharpApp {
 
-    [Activity(Label = "CustomColorAndFontActivity",Theme = "@style/AppTheme")]
+    [Activity(Label = "CustomColorAndFontActivity", Theme = "@style/AppTheme")]
     public class CustomColorAndFontActivity : AppCompatActivity {
 
         private TextView messageView;
@@ -20,12 +19,12 @@ namespace BottomBarSharpApp {
             messageView = FindViewById<TextView>(Resource.Id.messageView);
 
             var bottomBar = FindViewById<BottomBar>(Resource.Id.bottomBar);
-            bottomBar.TabSelect += (s,e) => {
-                messageView.Text = TabMessage.Get(e.TabId,false);
+            bottomBar.TabSelect += (s, e) => {
+                messageView.Text = TabMessage.Get(e.TabId, false);
             };
 
-            bottomBar.TabReSelect += (s,e) => {
-                Toast.MakeText(ApplicationContext,TabMessage.Get(e.TabId,true),ToastLength.Long).Show();
+            bottomBar.TabReSelect += (s, e) => {
+                Toast.MakeText(ApplicationContext, TabMessage.Get(e.TabId, true), ToastLength.Long).Show();
             };
         }
     }

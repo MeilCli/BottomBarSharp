@@ -5,6 +5,7 @@ using Android.Widget;
 using SFragment = Android.Support.V4.App.Fragment;
 
 namespace BottomBarSharpApp {
+
     public class SampleFragment : SFragment {
 
         private const string ArgText = "ARG_TEXT";
@@ -13,7 +14,7 @@ namespace BottomBarSharpApp {
 
         public static SampleFragment NewInstance(String text) {
             var args = new Bundle();
-            args.PutString(ArgText,text);
+            args.PutString(ArgText, text);
 
             var sampleFragment = new SampleFragment();
             sampleFragment.Arguments = args;
@@ -21,7 +22,7 @@ namespace BottomBarSharpApp {
             return sampleFragment;
         }
 
-        public override View OnCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             var textView = new TextView(Activity);
             textView.Text = Arguments.GetString(ArgText);
 

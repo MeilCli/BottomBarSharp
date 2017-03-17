@@ -7,7 +7,11 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 
+// disable not found xml document warning
+#pragma warning disable 1591
+
 namespace BottomBarSharp {
+
     public class BottomBarBadge : TextView {
 
         private int _count;
@@ -58,21 +62,21 @@ namespace BottomBarSharp {
                 .Start();
         }
 
-        internal void AttachToTab(BottomBarTab tab,int backgroundColor) {
-            var parameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent,ViewGroup.LayoutParams.WrapContent);
+        internal void AttachToTab(BottomBarTab tab, int backgroundColor) {
+            var parameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
 
             LayoutParameters = parameters;
             Gravity = GravityFlags.Center;
-            MiscUtils.SetTextAppearance(this,Resource.Style.BB_BottomBarBadge_Text);
+            MiscUtils.SetTextAppearance(this, Resource.Style.BB_BottomBarBadge_Text);
 
             SetColoredCircleBackground(backgroundColor);
             wrapTabAndBadgeInSameContainer(tab);
         }
 
         internal void SetColoredCircleBackground(int circleColor) {
-            int innerPadding = MiscUtils.DpToPixel(Context,1);
-            ShapeDrawable backgroundCircle = BadgeCircle.Make(innerPadding * 3,circleColor);
-            SetPadding(innerPadding,innerPadding,innerPadding,innerPadding);
+            int innerPadding = MiscUtils.DpToPixel(Context, 1);
+            ShapeDrawable backgroundCircle = BadgeCircle.Make(innerPadding * 3, circleColor);
+            SetPadding(innerPadding, innerPadding, innerPadding, innerPadding);
             setBackgroundCompat(backgroundCircle);
         }
 
@@ -80,16 +84,17 @@ namespace BottomBarSharp {
             var tabContainer = tab.Parent as ViewGroup;
             tabContainer.RemoveView(tab);
 
-            var badgeContainer = new BadgeContainer(Context);
-            badgeContainer.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent,ViewGroup.LayoutParams.WrapContent);
+            var badgeContainer = new BadgeContainer(Context) {
+                LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent)
+            };
 
             badgeContainer.AddView(tab);
             badgeContainer.AddView(this);
 
-            tabContainer.AddView(badgeContainer,tab.IndexInContainer);
+            tabContainer.AddView(badgeContainer, tab.IndexInContainer);
 
             EventHandler handler = null;
-            handler = (s,e) => {
+            handler = (s, e) => {
                 badgeContainer.ViewTreeObserver.GlobalLayout -= handler;
                 AdjustPositionAndSize(tab);
             };
@@ -102,20 +107,20 @@ namespace BottomBarSharp {
 
             badgeAndTabContainer.RemoveView(tab);
             originalTabContainer.RemoveView(badgeAndTabContainer);
-            originalTabContainer.AddView(tab,tab.IndexInContainer);
+            originalTabContainer.AddView(tab, tab.IndexInContainer);
         }
 
         internal void AdjustPositionAndSize(BottomBarTab tab) {
             AppCompatImageView iconView = tab.IconView;
             ViewGroup.LayoutParams parameters = LayoutParameters;
 
-            int size = Math.Max(Width,Height);
+            int size = Math.Max(Width, Height);
             float xOffset = (float)(iconView.Width / 1.25);
 
             SetX(iconView.GetX() + xOffset);
             TranslationY = 10;
 
-            if(parameters.Width != size || parameters.Height != size) {
+            if (parameters.Width != size || parameters.Height != size) {
                 parameters.Width = size;
                 parameters.Height = size;
                 LayoutParameters = parameters;
@@ -123,10 +128,12 @@ namespace BottomBarSharp {
         }
 
         private void setBackgroundCompat(Drawable background) {
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.JellyBean) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBean) {
                 Background = background;
             } else {
+#pragma warning disable 0618
                 SetBackgroundDrawable(background);
+#pragma warning restore 0618
             }
         }
 

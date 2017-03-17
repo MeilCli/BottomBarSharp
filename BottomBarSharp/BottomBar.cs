@@ -16,6 +16,9 @@ using Android.Widget;
 using Java.Lang;
 using static Android.Views.View;
 
+// disable not found xml document warning
+#pragma warning disable 1591
+
 namespace BottomBarSharp {
 
     /// <summary>
@@ -24,16 +27,16 @@ namespace BottomBarSharp {
     /// </summary>
     public class BottomBar : LinearLayout, IOnClickListener, IOnLongClickListener {
 
-        private const string StateCurrentSelectedTab = "STATE_CURRENT_SELECTED_TAB";
-        private const float DefaultInactiveShiftingTabAlpha = 0.6f;
+        private const string stateCurrentSelectedTab = "STATE_CURRENT_SELECTED_TAB";
+        private const float defaultInactiveShiftingTabAlpha = 0.6f;
 
         private BatchTabPropertyApplier batchPropertyApplier;
 
         // Behaviors
-        private const int BehaviorNone = 0;
-        private const int BehaviorShifting = 1;
-        private const int BehaviorShy = 2;
-        private const int BehaviorDrawUnderNav = 4;
+        private const int behaviorNone = 0;
+        private const int behaviorShifting = 1;
+        private const int behaviorShy = 2;
+        private const int behaviorDrawUnderNav = 4;
 
         private int primaryColor;
         private int screenWidth;
@@ -106,71 +109,71 @@ namespace BottomBarSharp {
         private BottomBarTab[] currentTabs;
 
         public BottomBar(Context context) : base(context) {
-            init(context,null);
+            init(context, null);
         }
 
-        public BottomBar(Context context,IAttributeSet attrs) : base(context,attrs) {
-            init(context,attrs);
+        public BottomBar(Context context, IAttributeSet attrs) : base(context, attrs) {
+            init(context, attrs);
         }
 
-        public BottomBar(IntPtr javaReference,JniHandleOwnership transfer) : base(javaReference,transfer) { }
+        public BottomBar(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
-        private void init(Context context,IAttributeSet attrs) {
+        private void init(Context context, IAttributeSet attrs) {
             batchPropertyApplier = new BatchTabPropertyApplier(this);
 
-            populateAttributes(context,attrs);
+            populateAttributes(context, attrs);
             initializeViews();
             determineInitialBackgroundColor();
 
-            if(tabXmlResource != 0) {
+            if (tabXmlResource != 0) {
                 SetItems(tabXmlResource);
             }
         }
 
-        private void populateAttributes(Context context,IAttributeSet attrs) {
-            primaryColor = MiscUtils.GetColor(Context,Resource.Attribute.colorPrimary);
+        private void populateAttributes(Context context, IAttributeSet attrs) {
+            primaryColor = MiscUtils.GetColor(Context, Resource.Attribute.colorPrimary);
             screenWidth = MiscUtils.GetScreenWidth(Context);
-            tenDp = MiscUtils.DpToPixel(Context,10);
-            maxFixedItemWidth = MiscUtils.DpToPixel(Context,168);
+            tenDp = MiscUtils.DpToPixel(Context, 10);
+            maxFixedItemWidth = MiscUtils.DpToPixel(Context, 168);
 
-            TypedArray ta = context.Theme.ObtainStyledAttributes(attrs,Resource.Styleable.BottomBar,0,0);
+            TypedArray ta = context.Theme.ObtainStyledAttributes(attrs, Resource.Styleable.BottomBar, 0, 0);
 
             try {
-                tabXmlResource = ta.GetResourceId(Resource.Styleable.BottomBar_bb_tabXmlResource,0);
-                isTabletMode = ta.GetBoolean(Resource.Styleable.BottomBar_bb_tabletMode,false);
-                behaviors = ta.GetInteger(Resource.Styleable.BottomBar_bb_behavior,BehaviorNone);
-                inActiveTabAlpha = ta.GetFloat(Resource.Styleable.BottomBar_bb_inActiveTabAlpha,isShiftingMode() ? DefaultInactiveShiftingTabAlpha : 1);
-                activeTabAlpha = ta.GetFloat(Resource.Styleable.BottomBar_bb_activeTabAlpha,1);
+                tabXmlResource = ta.GetResourceId(Resource.Styleable.BottomBar_bb_tabXmlResource, 0);
+                isTabletMode = ta.GetBoolean(Resource.Styleable.BottomBar_bb_tabletMode, false);
+                behaviors = ta.GetInteger(Resource.Styleable.BottomBar_bb_behavior, behaviorNone);
+                inActiveTabAlpha = ta.GetFloat(Resource.Styleable.BottomBar_bb_inActiveTabAlpha, isShiftingMode() ? defaultInactiveShiftingTabAlpha : 1);
+                activeTabAlpha = ta.GetFloat(Resource.Styleable.BottomBar_bb_activeTabAlpha, 1);
 
-                int defaultInActiveColor = isShiftingMode() ? Color.White.ToArgb() : ContextCompat.GetColor(context,Resource.Color.bb_inActiveBottomBarItemColor);
+                int defaultInActiveColor = isShiftingMode() ? Color.White.ToArgb() : ContextCompat.GetColor(context, Resource.Color.bb_inActiveBottomBarItemColor);
                 int defaultActiveColor = isShiftingMode() ? Color.White.ToArgb() : primaryColor;
 
-                inActiveTabColor = ta.GetColor(Resource.Styleable.BottomBar_bb_inActiveTabColor,defaultInActiveColor);
-                activeTabColor = ta.GetColor(Resource.Styleable.BottomBar_bb_activeTabColor,defaultActiveColor);
-                badgeBackgroundColor = ta.GetColor(Resource.Styleable.BottomBar_bb_badgeBackgroundColor,Color.Red.ToArgb());
-                titleTextAppearance = ta.GetResourceId(Resource.Styleable.BottomBar_bb_titleTextAppearance,0);
+                inActiveTabColor = ta.GetColor(Resource.Styleable.BottomBar_bb_inActiveTabColor, defaultInActiveColor);
+                activeTabColor = ta.GetColor(Resource.Styleable.BottomBar_bb_activeTabColor, defaultActiveColor);
+                badgeBackgroundColor = ta.GetColor(Resource.Styleable.BottomBar_bb_badgeBackgroundColor, Color.Red.ToArgb());
+                titleTextAppearance = ta.GetResourceId(Resource.Styleable.BottomBar_bb_titleTextAppearance, 0);
                 titleTypeFace = getTypeFaceFromAsset(ta.GetString(Resource.Styleable.BottomBar_bb_titleTypeFace));
-                showShadow = ta.GetBoolean(Resource.Styleable.BottomBar_bb_showShadow,true);
+                showShadow = ta.GetBoolean(Resource.Styleable.BottomBar_bb_showShadow, true);
             } finally {
                 ta.Recycle();
             }
         }
 
-        private bool isShiftingMode() => !isTabletMode && hasBehavior(BehaviorShifting);
+        private bool isShiftingMode() => !isTabletMode && hasBehavior(behaviorShifting);
 
         private bool drawUnderNav() {
             return !isTabletMode
-                    && hasBehavior(BehaviorDrawUnderNav)
+                    && hasBehavior(behaviorDrawUnderNav)
                     && NavbarUtils.ShouldDrawBehindNavbar(Context);
         }
 
-        private bool isShy() => !isTabletMode && hasBehavior(BehaviorShy);
+        private bool isShy() => !isTabletMode && hasBehavior(behaviorShy);
 
         private bool hasBehavior(int behavior) => (behaviors | behavior) == behaviors;
 
         private Typeface getTypeFaceFromAsset(string fontPath) {
-            if(fontPath != null) {
-                return Typeface.CreateFromAsset(Context.Assets,fontPath);
+            if (fontPath != null) {
+                return Typeface.CreateFromAsset(Context.Assets, fontPath);
             }
 
             return null;
@@ -179,13 +182,13 @@ namespace BottomBarSharp {
         private void initializeViews() {
             int width = isTabletMode ? LayoutParams.WrapContent : LayoutParams.MatchParent;
             int height = isTabletMode ? LayoutParams.WrapContent : LayoutParams.WrapContent;
-            var parameters = new LayoutParams(width,height);
+            var parameters = new LayoutParams(width, height);
 
             LayoutParameters = parameters;
             Orientation = isTabletMode ? Android.Widget.Orientation.Horizontal : Android.Widget.Orientation.Vertical;
-            ViewCompat.SetElevation(this,MiscUtils.DpToPixel(Context,8));
+            ViewCompat.SetElevation(this, MiscUtils.DpToPixel(Context, 8));
 
-            View rootView = Inflate(Context,isTabletMode ? Resource.Layout.bb_bottom_bar_item_container_tablet : Resource.Layout.bb_bottom_bar_item_container,this);
+            View rootView = Inflate(Context, isTabletMode ? Resource.Layout.bb_bottom_bar_item_container_tablet : Resource.Layout.bb_bottom_bar_item_container, this);
             rootView.LayoutParameters = parameters;
 
             backgroundOverlay = rootView.FindViewById<View>(Resource.Id.bb_bottom_bar_background_overlay);
@@ -193,13 +196,13 @@ namespace BottomBarSharp {
             tabContainer = rootView.FindViewById<ViewGroup>(Resource.Id.bb_bottom_bar_item_container);
             shadowView = rootView.FindViewById<View>(Resource.Id.bb_bottom_bar_shadow);
 
-            if(!showShadow) {
+            if (!showShadow) {
                 shadowView.Visibility = ViewStates.Gone;
             }
         }
 
         private void determineInitialBackgroundColor() {
-            if(isShiftingMode()) {
+            if (isShiftingMode()) {
                 defaultBackgroundColor = primaryColor;
             }
 
@@ -207,7 +210,7 @@ namespace BottomBarSharp {
 
             bool userHasDefinedBackgroundColor = userDefinedBackground != null && userDefinedBackground is ColorDrawable;
 
-            if(userHasDefinedBackgroundColor) {
+            if (userHasDefinedBackgroundColor) {
                 defaultBackgroundColor = ((ColorDrawable)userDefinedBackground).Color.ToArgb();
                 SetBackgroundColor(Color.Transparent);
             }
@@ -218,7 +221,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="xmlRes"></param>
         public void SetItems(int xmlRes) {
-            SetItems(xmlRes,null);
+            SetItems(xmlRes, null);
         }
 
         /// <summary>
@@ -227,16 +230,16 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="xmlRes"></param>
         /// <param name="defaultTabConfig"></param>
-        public void SetItems(int xmlRes,BottomBarTabConfig defaultTabConfig) {
-            if(xmlRes == 0) {
+        public void SetItems(int xmlRes, BottomBarTabConfig defaultTabConfig) {
+            if (xmlRes == 0) {
                 throw new RuntimeException("No items specified for the BottomBar!");
             }
 
-            if(defaultTabConfig == null) {
+            if (defaultTabConfig == null) {
                 defaultTabConfig = getTabConfig();
             }
 
-            TabParser parser = new TabParser(Context,defaultTabConfig,xmlRes);
+            TabParser parser = new TabParser(Context, defaultTabConfig, xmlRes);
             updateItems(parser.Tabs);
         }
 
@@ -245,7 +248,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="tabs"></param>
         public void SetItems(List<BottomBarTab> tabs) {
-            for(int i = 0;i < tabs.Count;i++) {
+            for (int i = 0; i < tabs.Count; i++) {
                 tabs[i].IndexInContainer = i;
             }
             updateItems(tabs);
@@ -259,8 +262,8 @@ namespace BottomBarSharp {
         /// <param name="title"></param>
         /// <param name="defaultTabConfig"></param>
         /// <returns></returns>
-        public BottomBarTab NewTab(int id,int icon,string title,BottomBarTabConfig defaultTabConfig = null) {
-            if(defaultTabConfig == null) {
+        public BottomBarTab NewTab(int id, int icon, string title, BottomBarTabConfig defaultTabConfig = null) {
+            if (defaultTabConfig == null) {
                 defaultTabConfig = getTabConfig();
             }
 
@@ -293,12 +296,12 @@ namespace BottomBarSharp {
 
             var viewsToAdd = new BottomBarTab[bottomBarItems.Count];
 
-            foreach(BottomBarTab bottomBarTab in bottomBarItems) {
+            foreach (BottomBarTab bottomBarTab in bottomBarItems) {
                 BottomBarTabType type;
 
-                if(isShiftingMode()) {
+                if (isShiftingMode()) {
                     type = BottomBarTabType.Shifting;
-                } else if(isTabletMode) {
+                } else if (isTabletMode) {
                     type = BottomBarTabType.Tablet;
                 } else {
                     type = BottomBarTabType.Fixed;
@@ -307,16 +310,16 @@ namespace BottomBarSharp {
                 bottomBarTab.Type = type;
                 bottomBarTab.PrepareLayout();
 
-                if(index == CurrentTabPosition) {
+                if (index == CurrentTabPosition) {
                     bottomBarTab.Select(false);
 
-                    handleBackgroundColorChange(bottomBarTab,false);
+                    handleBackgroundColorChange(bottomBarTab, false);
                 } else {
                     bottomBarTab.Deselect(false);
                 }
 
-                if(!isTabletMode) {
-                    if(bottomBarTab.Width > biggestWidth) {
+                if (!isTabletMode) {
+                    if (bottomBarTab.Width > biggestWidth) {
                         biggestWidth = bottomBarTab.Width;
                     }
 
@@ -332,19 +335,19 @@ namespace BottomBarSharp {
 
             currentTabs = viewsToAdd;
 
-            if(!isTabletMode) {
+            if (!isTabletMode) {
                 resizeTabsToCorrectSizes(viewsToAdd);
             }
         }
 
         private void resizeTabsToCorrectSizes(BottomBarTab[] tabsToAdd) {
-            int viewWidth = MiscUtils.PixelToDp(Context,Width);
-            if(viewWidth <= 0 || viewWidth > screenWidth) {
+            int viewWidth = MiscUtils.PixelToDp(Context, Width);
+            if (viewWidth <= 0 || viewWidth > screenWidth) {
                 viewWidth = screenWidth;
             }
 
             int proposedItemWidth = Java.Lang.Math.Min(
-                    MiscUtils.DpToPixel(Context,viewWidth / tabsToAdd.Length),
+                    MiscUtils.DpToPixel(Context, viewWidth / tabsToAdd.Length),
                     maxFixedItemWidth
             );
 
@@ -352,12 +355,12 @@ namespace BottomBarSharp {
             activeShiftingItemWidth = (int)(proposedItemWidth + (proposedItemWidth * (tabsToAdd.Length * 0.1)));
             int height = Java.Lang.Math.Round(Context.Resources.GetDimension(Resource.Dimension.bb_height));
 
-            foreach(BottomBarTab tabView in tabsToAdd) {
+            foreach (BottomBarTab tabView in tabsToAdd) {
                 ViewGroup.LayoutParams parameters = tabView.LayoutParameters;
                 parameters.Height = height;
 
-                if(isShiftingMode()) {
-                    if(tabView.IsActive) {
+                if (isShiftingMode()) {
+                    if (tabView.IsActive) {
                         parameters.Width = activeShiftingItemWidth;
                     } else {
                         parameters.Width = inActiveShiftingItemWidth;
@@ -366,7 +369,7 @@ namespace BottomBarSharp {
                     parameters.Width = proposedItemWidth;
                 }
 
-                if(tabView.Parent == null) {
+                if (tabView.Parent == null) {
                     tabContainer.AddView(tabView);
                 }
 
@@ -382,7 +385,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="listener">a listener for monitoring changes in tab selection.</param>
         public void SetOnTabSelectListener(IOnTabSelectListener listener) {
-            SetOnTabSelectListener(listener,true);
+            SetOnTabSelectListener(listener, true);
         }
 
         /// <summary>
@@ -393,10 +396,10 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="listener">a listener for monitoring changes in tab selection.</param>
         /// <param name="shouldFireInitially">whether the listener should be fired the first time it's set.</param>
-        public void SetOnTabSelectListener(IOnTabSelectListener listener,bool shouldFireInitially) {
+        public void SetOnTabSelectListener(IOnTabSelectListener listener, bool shouldFireInitially) {
             onTabSelectListener = listener;
 
-            if(shouldFireInitially && listener != null && TabCount > 0) {
+            if (shouldFireInitially && listener != null && TabCount > 0) {
                 listener.OnTabSelected(CurrentTabId);
             }
         }
@@ -425,7 +428,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="defaultTabPosition">the default tab position.</param>
         public void SetDefaultTabPosition(int defaultTabPosition) {
-            if(isComingFromRestoredState)
+            if (isComingFromRestoredState)
                 return;
 
             SelectTabAtPosition(defaultTabPosition);
@@ -445,7 +448,7 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="position">the position to select.</param>
         public void SelectTabAtPosition(int position) {
-            SelectTabAtPosition(position,false);
+            SelectTabAtPosition(position, false);
         }
 
         /// <summary>
@@ -453,8 +456,8 @@ namespace BottomBarSharp {
         /// </summary>
         /// <param name="position">the position to select.</param>
         /// <param name="animate">should the tab change be animated or not.</param>
-        public void SelectTabAtPosition(int position,bool animate) {
-            if(position > TabCount - 1 || position < 0) {
+        public void SelectTabAtPosition(int position, bool animate) {
+            if (position > TabCount - 1 || position < 0) {
                 throw new IndexOutOfBoundsException("Can't select tab at position " +
                         position + ". This BottomBar has no items at that position.");
             }
@@ -466,8 +469,8 @@ namespace BottomBarSharp {
             newTab.Select(animate);
 
             updateSelectedTab(position);
-            shiftingMagic(oldTab,newTab,animate);
-            handleBackgroundColorChange(newTab,animate);
+            shiftingMagic(oldTab, newTab, animate);
+            handleBackgroundColorChange(newTab, animate);
         }
 
         /// <summary>
@@ -478,7 +481,7 @@ namespace BottomBarSharp {
         public BottomBarTab GetTabAtPosition(int position) {
             View child = tabContainer.GetChildAt(position);
 
-            if(child is BadgeContainer) {
+            if (child is BadgeContainer) {
                 return findTabInLayout((BadgeContainer)child);
             }
 
@@ -587,20 +590,20 @@ namespace BottomBarSharp {
             batchPropertyApplier.ApplyToAllTabs(tab => tab.TitleTypeFace = titleTypeFace);
         }
 
-        protected override void OnLayout(bool changed,int left,int top,int right,int bottom) {
-            base.OnLayout(changed,left,top,right,bottom);
-            if(changed) {
-                if(!isTabletMode) {
+        protected override void OnLayout(bool changed, int left, int top, int right, int bottom) {
+            base.OnLayout(changed, left, top, right, bottom);
+            if (changed) {
+                if (!isTabletMode) {
                     resizeTabsToCorrectSizes(currentTabs);
                 }
 
                 updateTitleBottomPadding();
 
-                if(isShy()) {
+                if (isShy()) {
                     initializeShyBehavior();
                 }
 
-                if(drawUnderNav()) {
+                if (drawUnderNav()) {
                     resizeForDrawingUnderNavbar();
                 }
             }
@@ -609,15 +612,15 @@ namespace BottomBarSharp {
         private void updateTitleBottomPadding() {
             int tabCount = TabCount;
 
-            if(tabContainer == null || tabCount == 0 || !isShiftingMode()) {
+            if (tabContainer == null || tabCount == 0 || !isShiftingMode()) {
                 return;
             }
 
-            for(int i = 0;i < tabCount;i++) {
+            for (int i = 0; i < tabCount; i++) {
                 BottomBarTab tab = GetTabAtPosition(i);
                 TextView title = tab.TitleView;
 
-                if(title == null) {
+                if (title == null) {
                     continue;
                 }
 
@@ -626,8 +629,8 @@ namespace BottomBarSharp {
                 int paddingInsideTitle = height - baseline;
                 int missingPadding = tenDp - paddingInsideTitle;
 
-                if(missingPadding > 0) {
-                    title.SetPadding(title.PaddingLeft,title.PaddingTop,title.PaddingRight,missingPadding + title.PaddingBottom);
+                if (missingPadding > 0) {
+                    title.SetPadding(title.PaddingLeft, title.PaddingTop, title.PaddingRight, missingPadding + title.PaddingBottom);
                 }
             }
         }
@@ -637,15 +640,15 @@ namespace BottomBarSharp {
 
             bool hasAbusiveParent = parent != null && parent is CoordinatorLayout;
 
-            if(!hasAbusiveParent) {
+            if (!hasAbusiveParent) {
                 throw new RuntimeException("In order to have shy behavior, the " +
                         "BottomBar must be a direct child of a CoordinatorLayout.");
             }
 
-            if(!shyHeightAlreadyCalculated) {
+            if (!shyHeightAlreadyCalculated) {
                 int height = Height;
 
-                if(height != 0) {
+                if (height != 0) {
                     updateShyHeight(height);
                     shyHeightAlreadyCalculated = true;
                 }
@@ -653,14 +656,14 @@ namespace BottomBarSharp {
         }
 
         private void updateShyHeight(int height) {
-            ((CoordinatorLayout.LayoutParams)LayoutParameters).Behavior = new BottomNavigationBehavior<View>(height,0,false);
+            ((CoordinatorLayout.LayoutParams)LayoutParameters).Behavior = new BottomNavigationBehavior<View>(height, 0, false);
         }
 
         private void resizeForDrawingUnderNavbar() {
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat) {
                 int currentHeight = Height;
 
-                if(currentHeight != 0 && !navBarAccountedHeightCalculated) {
+                if (currentHeight != 0 && !navBarAccountedHeightCalculated) {
                     navBarAccountedHeightCalculated = true;
                     tabContainer.LayoutParameters.Height = currentHeight;
 
@@ -668,7 +671,7 @@ namespace BottomBarSharp {
                     int finalHeight = currentHeight + navbarHeight;
                     LayoutParameters.Height = finalHeight;
 
-                    if(isShy()) {
+                    if (isShy()) {
                         updateShyHeight(finalHeight);
                     }
                 }
@@ -677,19 +680,19 @@ namespace BottomBarSharp {
 
         protected override IParcelable OnSaveInstanceState() {
             Bundle bundle = SaveState();
-            bundle.PutParcelable("superstate",base.OnSaveInstanceState());
+            bundle.PutParcelable("superstate", base.OnSaveInstanceState());
             return bundle;
         }
 
         internal Bundle SaveState() {
             var outState = new Bundle();
-            outState.PutInt(StateCurrentSelectedTab,CurrentTabPosition);
+            outState.PutInt(stateCurrentSelectedTab, CurrentTabPosition);
 
             return outState;
         }
 
         protected override void OnRestoreInstanceState(IParcelable state) {
-            if(state is Bundle) {
+            if (state is Bundle) {
                 var bundle = state as Bundle;
                 RestoreState(bundle);
 
@@ -699,12 +702,12 @@ namespace BottomBarSharp {
         }
 
         internal void RestoreState(Bundle savedInstanceState) {
-            if(savedInstanceState != null) {
+            if (savedInstanceState != null) {
                 isComingFromRestoredState = true;
                 ignoreTabReselectionListener = true;
 
-                int restoredPosition = savedInstanceState.GetInt(StateCurrentSelectedTab,CurrentTabPosition);
-                SelectTabAtPosition(restoredPosition,false);
+                int restoredPosition = savedInstanceState.GetInt(stateCurrentSelectedTab, CurrentTabPosition);
+                SelectTabAtPosition(restoredPosition, false);
             }
         }
 
@@ -713,10 +716,10 @@ namespace BottomBarSharp {
         public bool OnLongClick(View v) => handleLongClick(v);
 
         private BottomBarTab findTabInLayout(ViewGroup child) {
-            for(int i = 0;i < child.ChildCount;i++) {
+            for (int i = 0; i < child.ChildCount; i++) {
                 View candidate = child.GetChildAt(i);
 
-                if(candidate is BottomBarTab) {
+                if (candidate is BottomBarTab) {
                     return candidate as BottomBarTab;
                 }
             }
@@ -731,17 +734,17 @@ namespace BottomBarSharp {
             oldTab.Deselect(true);
             newTab.Select(true);
 
-            shiftingMagic(oldTab,newTab,true);
-            handleBackgroundColorChange(newTab,true);
+            shiftingMagic(oldTab, newTab, true);
+            handleBackgroundColorChange(newTab, true);
             updateSelectedTab(newTab.IndexInContainer);
         }
 
         private bool handleLongClick(View v) {
-            if(v is BottomBarTab) {
+            if (v is BottomBarTab) {
                 var longClickedTab = v as BottomBarTab;
 
-                if((isShiftingMode() || isTabletMode) && !longClickedTab.IsActive) {
-                    Toast.MakeText(Context,longClickedTab.Title,ToastLength.Short).Show();
+                if ((isShiftingMode() || isTabletMode) && !longClickedTab.IsActive) {
+                    Toast.MakeText(Context, longClickedTab.Title, ToastLength.Short).Show();
                 }
             }
 
@@ -751,59 +754,59 @@ namespace BottomBarSharp {
         private void updateSelectedTab(int newPosition) {
             int newTabId = GetTabAtPosition(newPosition).Id;
 
-            if(newPosition != CurrentTabPosition) {
+            if (newPosition != CurrentTabPosition) {
                 onTabSelectListener?.OnTabSelected(newTabId);
-                TabSelect?.Invoke(this,new TabEventArgs(newTabId));
-            } else if(!ignoreTabReselectionListener) {
+                TabSelect?.Invoke(this, new TabEventArgs(newTabId));
+            } else if (!ignoreTabReselectionListener) {
                 onTabReselectListener?.OnTabReSelected(newTabId);
-                TabReSelect?.Invoke(this,new TabEventArgs(newTabId));
+                TabReSelect?.Invoke(this, new TabEventArgs(newTabId));
             }
 
             CurrentTabPosition = newPosition;
 
-            if(ignoreTabReselectionListener) {
+            if (ignoreTabReselectionListener) {
                 ignoreTabReselectionListener = false;
             }
         }
 
-        private void shiftingMagic(BottomBarTab oldTab,BottomBarTab newTab,bool animate) {
-            if(isShiftingMode()) {
-                oldTab.UpdateWidth(inActiveShiftingItemWidth,animate);
-                newTab.UpdateWidth(activeShiftingItemWidth,animate);
+        private void shiftingMagic(BottomBarTab oldTab, BottomBarTab newTab, bool animate) {
+            if (isShiftingMode()) {
+                oldTab.UpdateWidth(inActiveShiftingItemWidth, animate);
+                newTab.UpdateWidth(activeShiftingItemWidth, animate);
             }
         }
 
-        private void handleBackgroundColorChange(BottomBarTab tab,bool animate) {
+        private void handleBackgroundColorChange(BottomBarTab tab, bool animate) {
             int newColor = tab.BarColorWhenSelected;
 
-            if(currentBackgroundColor == newColor) {
+            if (currentBackgroundColor == newColor) {
                 return;
             }
 
-            if(!animate) {
+            if (!animate) {
                 outerContainer.SetBackgroundColor(new Color(newColor));
                 return;
             }
 
             View clickedView = tab;
 
-            if(tab.HasActiveBadge) {
+            if (tab.HasActiveBadge) {
                 clickedView = tab.OuterView;
             }
 
-            animateBGColorChange(clickedView,newColor);
+            animateBGColorChange(clickedView, newColor);
             currentBackgroundColor = newColor;
         }
 
-        private void animateBGColorChange(View clickedView,int newColor) {
+        private void animateBGColorChange(View clickedView, int newColor) {
             prepareForBackgroundColorAnimation(newColor);
 
-            if(Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop) {
-                if(!outerContainer.IsAttachedToWindow) {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop) {
+                if (!outerContainer.IsAttachedToWindow) {
                     return;
                 }
 
-                backgroundCircularRevealAnimation(clickedView,newColor);
+                backgroundCircularRevealAnimation(clickedView, newColor);
             } else {
                 backgroundCrossfadeAnimation(newColor);
             }
@@ -817,7 +820,7 @@ namespace BottomBarSharp {
             backgroundOverlay.Visibility = ViewStates.Visible;
         }
 
-        private void backgroundCircularRevealAnimation(View clickedView,int newColor) {
+        private void backgroundCircularRevealAnimation(View clickedView, int newColor) {
             int centerX = (int)(ViewCompat.GetX(clickedView) + (clickedView.MeasuredWidth / 2));
             int yOffset = isTabletMode ? (int)ViewCompat.GetY(clickedView) : 0;
             int centerY = yOffset + clickedView.MeasuredHeight / 2;
@@ -832,14 +835,14 @@ namespace BottomBarSharp {
                     finalRadius
             );
 
-            if(isTabletMode) {
+            if (isTabletMode) {
                 animator.SetDuration(500);
             }
 
-            var handler = new EventHandler((s,e) => {
+            var handler = new EventHandler((s, e) => {
                 outerContainer.SetBackgroundColor(new Color(newColor));
                 backgroundOverlay.Visibility = ViewStates.Invisible;
-                ViewCompat.SetAlpha(backgroundOverlay,1);
+                ViewCompat.SetAlpha(backgroundOverlay, 1);
             });
 
             animator.AnimationEnd += handler;
@@ -849,14 +852,14 @@ namespace BottomBarSharp {
         }
 
         private void backgroundCrossfadeAnimation(int newColor) {
-            ViewCompat.SetAlpha(backgroundOverlay,0);
+            ViewCompat.SetAlpha(backgroundOverlay, 0);
             var animator = ViewCompat.Animate(backgroundOverlay)
                 .Alpha(1);
 
-            var handler = new EventHandler((s,e) => {
+            var handler = new EventHandler((s, e) => {
                 outerContainer.SetBackgroundColor(new Color(newColor));
                 backgroundOverlay.Visibility = ViewStates.Invisible;
-                ViewCompat.SetAlpha(backgroundOverlay,1);
+                ViewCompat.SetAlpha(backgroundOverlay, 1);
             });
 
             var listener = new ViewPropertyAnimatorListenerAdapter();
@@ -872,8 +875,8 @@ namespace BottomBarSharp {
         /// <param name="visible">true resets translation to 0, false translates view to hidden</param>
         private void toggleShyVisibility(bool visible) {
             BottomNavigationBehavior<BottomBar> from = BottomNavigationBehavior<BottomBar>.From(this);
-            if(from != null) {
-                from.setHidden(this,visible);
+            if (from != null) {
+                from.SetHidden(this, visible);
             }
         }
 
@@ -887,11 +890,11 @@ namespace BottomBarSharp {
             }
 
             public void OnAnimationCancel(View view) {
-                Handler.Invoke(this,new EventArgs());
+                Handler.Invoke(this, new EventArgs());
             }
 
             public void OnAnimationEnd(View view) {
-                Handler.Invoke(this,new EventArgs());
+                Handler.Invoke(this, new EventArgs());
             }
 
             public void OnAnimationStart(View view) {
