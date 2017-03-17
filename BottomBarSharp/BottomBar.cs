@@ -880,14 +880,13 @@ namespace BottomBarSharp {
             }
         }
 
-        private class ViewPropertyAnimatorListenerAdapter : IViewPropertyAnimatorListener {
+        private class ViewPropertyAnimatorListenerAdapter : Java.Lang.Object, IViewPropertyAnimatorListener {
 
             public event EventHandler Handler;
 
-            public IntPtr Handle { get; set; }
+            public ViewPropertyAnimatorListenerAdapter() { }
 
-            public void Dispose() {
-            }
+            public ViewPropertyAnimatorListenerAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
 
             public void OnAnimationCancel(View view) {
                 Handler.Invoke(this, new EventArgs());
